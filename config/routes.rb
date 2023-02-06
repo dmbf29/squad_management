@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   resources :teams, only: [:index]
   resources :squads, only: [:show] do
-    collection do
-      post :import
+    member do
+      get :import
+      post :import_players
     end
   end
 end
