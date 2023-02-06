@@ -1,23 +1,34 @@
 require 'open-uri'
 require 'nokogiri'
-require "pry-byebug"
 
 class ParseHtmlService
-  attr_reader :url, :squad
+  attr_reader :url, :squad, :players
 
   def initialize(attrs = {})
     @url = attrs[:url]
     @squad = attrs[:squad]
+    @players = @squad.players
+    @html_players = []
   end
 
   def call
     html = URI.open(url)
     doc = Nokogiri::HTML.parse(html, nil, "utf-8")
-    binding.pry
+    @keys = doc.search('table tr').first.text.split("\n\r\n\t").map(&:strip)
+    sanitize_keys
+    doc.search('table tr')[1..-1].each do |row|
+      player_info = {}
+      infos = row.text.split("\n\r\n\t").map(&:strip)
+      infos.each_with_index do |info, index|
+        player_info[keys[index]] = info
+      end
+      player = players.find_by(name: player_info['Name']) || Player.new
+      player.update(player_info)
+      # @html_players << player_info
+    end
+    # @html_players
+  end
+
+  def sanitize_keys
   end
 end
-
-
-# http://res.cloudinary.com/dmbf29/image/upload/78pyio19vku20jpbarskk66dulkg
-url = "https://res.cloudinary.com/dmbf29/raw/upload/v1675667301/development/78pyio19vku20jpbarskk66dulkg.html"
-ParseHtmlService.new(url: url, squad: Squad.find(13)).call
