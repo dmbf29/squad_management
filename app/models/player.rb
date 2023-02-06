@@ -34,6 +34,8 @@
 #  fk_rails_...  (team_id => teams.id)
 #
 class Player < ApplicationRecord
+  include NumberFormat
+
   belongs_to :team
   has_many :spot_places, dependent: :destroy
   has_many :spots, through: :spot_places
@@ -53,5 +55,7 @@ class Player < ApplicationRecord
   end
 
   def self.sanitize_value(player_info)
+    player_info[:transfer_value] = format_price(player_info[:transfer_value])
+    player_info
   end
 end

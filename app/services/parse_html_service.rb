@@ -28,6 +28,7 @@ class ParseHtmlService
       player_info[@keys[index]] = info
     end
     player_info = player_info.delete_if { |key, value| key.nil? }
+    player_info = Player.sanitize_value(player_info)
     player_info[:team_id] = squad.team.id
     player = players.find_by(name: player_info[:name])
     player ? player.update(player_info) : Player.create(player_info)
