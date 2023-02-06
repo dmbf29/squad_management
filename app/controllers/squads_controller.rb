@@ -7,6 +7,10 @@ class SquadsController < ApplicationController
 
   def import_players
     @squad.update(squad_params)
+    if @squad.uploads.attached?
+      url = Cloudinary::Utils.cloudinary_url(@squad.uploads.last.key)
+      ParseHtmlService.new(squad: @squad, url: url)
+    end
   end
 
   private
