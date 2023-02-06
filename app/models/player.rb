@@ -39,4 +39,19 @@ class Player < ApplicationRecord
   has_many :spots, through: :spot_places
   has_many :squads, through: :spots
   validates :name, presence: true
+
+  def self.sanitize_keys(keys)
+    keys.map! do |key|
+      case key
+      when "Age" then :age
+      when 'Name' then :name
+      when "Position" then :positions
+      when "Club" then :club
+      when "Transfer Value" then :transfer_value
+      end
+    end
+  end
+
+  def self.sanitize_value(player_info)
+  end
 end

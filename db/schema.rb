@@ -67,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_063640) do
     t.integer "release_clause_special"
     t.string "recommendation"
     t.string "nationality"
+    t.string "club"
     t.bigint "team_id", null: false
     t.integer "price_purchased"
     t.integer "price_sold"

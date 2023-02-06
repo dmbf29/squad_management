@@ -8,27 +8,28 @@ class ParseHtmlService
     @url = attrs[:url]
     @squad = attrs[:squad]
     @players = @squad.players
-    @html_players = []
+    # @html_players = []
   end
 
   def call
     html = URI.open(url)
     doc = Nokogiri::HTML.parse(html, nil, "utf-8")
     @keys = doc.search('table tr').first.text.split("\n\r\n\t").map(&:strip)
-    sanitize_keys
+    @keys = Player.sanitize_keys(@keys)
     doc.search('table tr')[1..-1].each do |row|
-      player_info = {}
-      infos = row.text.split("\n\r\n\t").map(&:strip)
-      infos.each_with_index do |info, index|
-        player_info[keys[index]] = info
-      end
-      player = players.find_by(name: player_info['Name']) || Player.new
-      player.update(player_info)
-      # @html_players << player_info
+      create_or_update_player(row)
     end
-    # @html_players
   end
 
-  def sanitize_keys
+  def create_or_update_player(row)
+    player_info = {}
+    infos = row.text.split("\n\r\n\t").map(&:strip)
+    infos.each_with_index do |info, index|
+      player_info[@keys[index]] = info
+    end
+    player_info = player_info.delete_if { |key, value| key.nil? }
+    player_info[:team_id] = squad.team.id
+    player = players.find_by(name: player_info[:name])
+    player ? player.update(player_info) : Player.create(player_info)
   end
 end

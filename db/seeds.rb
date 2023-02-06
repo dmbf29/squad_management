@@ -58,4 +58,4 @@
 
 # http://res.cloudinary.com/dmbf29/image/upload/78pyio19vku20jpbarskk66dulkg
 url = "https://res.cloudinary.com/dmbf29/raw/upload/v1675667301/development/78pyio19vku20jpbarskk66dulkg.html"
-p ParseHtmlService.new(url: url, squad: Squad.find(13)).call
+ParseHtmlService.new(url: url, squad: Squad.find(1)).call
