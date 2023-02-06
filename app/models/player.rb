@@ -35,4 +35,8 @@
 #
 class Player < ApplicationRecord
   belongs_to :team
+  has_many :spot_places, dependent: :destroy
+  has_many :spots, through: :spot_places
+  has_many :squads, through: :spots
+  validates :name, presence: true
 end

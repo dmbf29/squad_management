@@ -22,4 +22,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :teams, dependent: :destroy
+  has_many :players, through: :teams
+  has_many :squads, through: :teams
 end

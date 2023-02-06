@@ -19,4 +19,9 @@
 #
 class Squad < ApplicationRecord
   belongs_to :team
+  has_many :spots, dependent: :destroy
+  has_many :spot_places, through: :spots
+  has_many :players, through: :spot_places
+  validates :name, presence: true
+  validates :total_rows, presence: true, numericality: { greater_than: 0, only_integer: true }
 end

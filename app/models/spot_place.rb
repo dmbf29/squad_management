@@ -22,4 +22,10 @@
 class SpotPlace < ApplicationRecord
   belongs_to :spot
   belongs_to :player
+  validates :position, presence: true, uniqueness: { scope: :spot }
+  before_commit :check_position
+
+  def check_position
+    self.position = spot.spot_places + 1 if position.nil?
+  end
 end

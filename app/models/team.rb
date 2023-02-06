@@ -19,4 +19,8 @@
 #
 class Team < ApplicationRecord
   belongs_to :user
+  has_many :squads, dependent: :destroy
+  has_many :players, dependent: :destroy
+  has_many :spots, through: :squads
+  validates :name, presence: true
 end
