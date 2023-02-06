@@ -4,6 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  age                    :integer
+#  club                   :string
 #  current_ability        :float            default(0.0)
 #  home_grown_club        :boolean          default(FALSE)
 #  home_grown_date        :date

@@ -107,6 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_063640) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
+    t.string "currency", default: "£"
     t.date "current_date"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false

@@ -4,6 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  age                    :integer
+#  club                   :string
 #  current_ability        :float            default(0.0)
 #  home_grown_club        :boolean          default(FALSE)
 #  home_grown_date        :date
@@ -41,6 +42,9 @@ class Player < ApplicationRecord
   has_many :spots, through: :spot_places
   has_many :squads, through: :spots
   validates :name, presence: true
+
+  def format_transfer
+  end
 
   def self.sanitize_keys(keys)
     keys.map! do |key|

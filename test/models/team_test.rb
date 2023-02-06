@@ -3,6 +3,7 @@
 # Table name: teams
 #
 #  id           :bigint           not null, primary key
+#  currency     :string           default("£")
 #  current_date :date
 #  name         :string
 #  created_at   :datetime         not null
