@@ -46,6 +46,7 @@ class Player < ApplicationRecord
   def format_transfer
   end
 
+  # Converting all the FM column names in the corresponding DB colmn
   def self.sanitize_keys(keys)
     keys.map! do |key|
       case key
@@ -58,7 +59,9 @@ class Player < ApplicationRecord
     end
   end
 
+  # Converting some raw data from FM into a more useful data type
   def self.sanitize_value(player_info)
+    # changing "£2.5M - £5.4M" or "£5.4K" to an integer
     player_info[:transfer_value] = format_price(player_info[:transfer_value])
     player_info
   end
