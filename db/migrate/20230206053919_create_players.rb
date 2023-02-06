@@ -2,14 +2,14 @@ class CreatePlayers < ActiveRecord::Migration[7.0]
   def change
     create_table :players do |t|
       t.string :name
-      t.boolean :home_grown_nation
-      t.boolean :home_grown_club
+      t.boolean :home_grown_nation, default: false
+      t.boolean :home_grown_club, default: false
       t.date :home_grown_date
-      t.boolean :on_loan
+      t.boolean :on_loan, default: false
       t.string :positions
-      t.float :current_ability
-      t.float :potential_low
-      t.float :potential_high
+      t.float :current_ability, default: 0
+      t.float :potential_low, default: 0
+      t.float :potential_high, default: 0
       t.integer :age
       t.integer :transfer_value
       t.string :media_desc
