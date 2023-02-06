@@ -54,4 +54,4 @@ end
   ]
   Spot.create!(spots)
 end
-puts "... created #{Spot.count} squads."
+puts "... created #{Spot.count} spots."
