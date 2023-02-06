@@ -24,4 +24,5 @@ class Squad < ApplicationRecord
   has_many :players, through: :spot_places
   validates :name, presence: true
   validates :total_rows, presence: true, numericality: { greater_than: 0, only_integer: true }
+  has_many_attached :uploads
 end
