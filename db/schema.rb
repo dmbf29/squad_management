@@ -10,9 +10,71 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_052440) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_053949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "players", force: :cascade do |t|
+    t.string "name"
+    t.boolean "home_grown_nation", default: false
+    t.boolean "home_grown_club", default: false
+    t.date "home_grown_date"
+    t.boolean "on_loan", default: false
+    t.string "positions"
+    t.float "current_ability", default: 0.0
+    t.float "potential_low", default: 0.0
+    t.float "potential_high", default: 0.0
+    t.integer "age"
+    t.integer "transfer_value"
+    t.string "media_desc"
+    t.integer "release_clause"
+    t.integer "release_clause_special"
+    t.string "recommendation"
+    t.string "nationality"
+    t.bigint "team_id", null: false
+    t.integer "price_purchased"
+    t.integer "price_sold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "spot_places", force: :cascade do |t|
+    t.integer "position"
+    t.bigint "spot_id", null: false
+    t.bigint "player_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_spot_places_on_player_id"
+    t.index ["spot_id"], name: "index_spot_places_on_spot_id"
+  end
+
+  create_table "spots", force: :cascade do |t|
+    t.string "name"
+    t.integer "position"
+    t.integer "row_number"
+    t.bigint "squad_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["squad_id"], name: "index_spots_on_squad_id"
+  end
+
+  create_table "squads", force: :cascade do |t|
+    t.string "name"
+    t.integer "total_rows", default: 3
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_squads_on_team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_teams_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +88,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_052440) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "players", "teams"
+  add_foreign_key "spot_places", "players"
+  add_foreign_key "spot_places", "spots"
+  add_foreign_key "spots", "squads"
+  add_foreign_key "squads", "teams"
+  add_foreign_key "teams", "users"
 end
