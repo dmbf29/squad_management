@@ -10,4 +10,9 @@ Rails.application.routes.draw do
       post :import
     end
   end
+  resources :spots, only: [] do
+    member do
+      patch :update_places
+    end
+  end
 end

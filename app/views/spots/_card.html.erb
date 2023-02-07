@@ -1,6 +1,6 @@
 <div class="card-spot mx-3">
   <span><%= spot.name %></span>
-  <div data-controller="sortablejs" class="h-100">
+  <div data-controller="sortablejs" class="h-100" data-id="<%= spot.id %>">
     <% spot.spot_places.order(:rank).each do |spot_place| %>
       <%= render 'spot_places/row', spot_place: spot_place %>
     <% end %>

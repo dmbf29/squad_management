@@ -22,7 +22,7 @@
 class SpotPlace < ApplicationRecord
   belongs_to :spot
   belongs_to :player
-  validates :rank, presence: true, uniqueness: { scope: :spot }
+  # validates :rank, presence: true, uniqueness: { scope: :spot }
   before_validation :check_rank
 
   def check_rank
