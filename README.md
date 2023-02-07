@@ -24,6 +24,7 @@ Inside `.env`, set these variables. For any APIs, see group Slack channel.
 ```
 ADMIN_PASSWORD=any_password
 CLOUDINARY_URL=your_own_cloudinary_url_key
+CLOUDINARY_name=cloud_nam
 ```
 
 ### DB Setup
