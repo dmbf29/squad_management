@@ -14,7 +14,6 @@
 #  nationality            :string
 #  on_loan                :boolean          default(FALSE)
 #  playing_time           :string
-#  position_best          :string
 #  positions              :string
 #  potential_high         :float            default(0.0)
 #  potential_low          :float            default(0.0)
@@ -26,14 +25,17 @@
 #  transfer_value         :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  position_id            :bigint
 #  team_id                :bigint           not null
 #
 # Indexes
 #
-#  index_players_on_team_id  (team_id)
+#  index_players_on_position_id  (position_id)
+#  index_players_on_team_id      (team_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (position_id => positions.id)
 #  fk_rails_...  (team_id => teams.id)
 #
 require "test_helper"

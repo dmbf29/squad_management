@@ -31,5 +31,11 @@ module FmInfoFormat
 
       string.match?(/Out On Loan/)
     end
+
+    def find_position(position)
+      return nil if position == '-' || position.blank?
+
+      Position.find_by(name: position)
+    end
   end
 end

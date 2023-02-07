@@ -14,7 +14,6 @@
 #  nationality            :string
 #  on_loan                :boolean          default(FALSE)
 #  playing_time           :string
-#  position_best          :string
 #  positions              :string
 #  potential_high         :float            default(0.0)
 #  potential_low          :float            default(0.0)
@@ -26,14 +25,17 @@
 #  transfer_value         :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  position_id            :bigint
 #  team_id                :bigint           not null
 #
 # Indexes
 #
-#  index_players_on_team_id  (team_id)
+#  index_players_on_position_id  (position_id)
+#  index_players_on_team_id      (team_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (position_id => positions.id)
 #  fk_rails_...  (team_id => teams.id)
 #
 class Player < ApplicationRecord
@@ -41,6 +43,7 @@ class Player < ApplicationRecord
   include FmInfoFormat
 
   belongs_to :team
+  belongs_to :position, optional: true
   has_many :spot_places, dependent: :destroy
   has_many :spots, through: :spot_places
   has_many :squads, through: :spots
@@ -68,7 +71,7 @@ class Player < ApplicationRecord
       when "Age" then :age
       when 'Name' then :name
       when "Position" then :positions
-      when "Best Pos" then :position_best
+      when "Best Pos" then :position
       when "Club" then :club
       when "Transfer Value" then :transfer_value
       when "Min Fee Rls" then :release_clause
@@ -93,6 +96,7 @@ class Player < ApplicationRecord
     # changing "Trained at club (15-21)" to a boolean
     player_info[:home_grown_club] = trained_at_club(player_info[:home_grown_club])
     player_info[:on_loan] = on_loan(player_info[:playing_time])
+    player_info[:position] = find_position(player_info[:position])
     player_info
   end
 end

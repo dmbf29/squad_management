@@ -1,0 +1,46 @@
+.tabs-underlined {
+  display: flex;
+  align-items: center;
+}
+
+.tabs-underlined {
+  .tab-underlined {
+    color: black;
+    padding: 0px;
+    margin: 0px;
+    opacity: .4;
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 4px solid transparent;
+    display: block;
+  }
+
+  .tab-underlined:hover {
+    opacity: 0.5;
+  }
+
+  .tab-underlined.active {
+    opacity: 1;
+    border-bottom: 3px solid #555555;
+  }
+}
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+}

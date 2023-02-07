@@ -32,6 +32,12 @@ class ParseHtmlService
     player_info = Player.sanitize_value(player_info)
     player_info[:team_id] = squad.team.id
     player = players.find_by(name: player_info[:name])
-    player ? player.update(player_info) : Player.create(player_info)
+    if player
+      # TODO: should only update specific attributes
+      player.update(player_info)
+    else
+      player = Player.create(player_info)
+      squad.add_player_in_spot(player)
+    end
   end
 end

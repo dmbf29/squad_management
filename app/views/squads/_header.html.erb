@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h1><%= squad.team.name %></h1>
+  <ul class="nav tabs-underlined" id="squad_tabs" role="tablist">
+    <% squad.team.squads.each do |squad| %>
+      <li class="nav-item" role="presentation">
+        <span class="nav-link"><%= link_to squad.name, squad_path(squad), class: "tab-underlined #{'active' if squad.id == params[:id].to_i }" %></span>
+      </li>
+    <% end %>
+    <li>
+      <span class="nav-link">
+        <%= link_to new_team_squad_path(squad.team), class: "tab-underlined" do %>
+          <i class="fa-regular fa-square-plus"></i>
+        <% end %>
+      </span>
+    </li>
+  </ul>
+</div>

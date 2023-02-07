@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_040013) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_07_065539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,7 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_040013) do
     t.boolean "on_loan", default: false
     t.string "playing_time"
     t.string "positions"
-    t.string "position_best"
     t.float "current_ability", default: 0.0
     t.float "potential_low", default: 0.0
     t.float "potential_high", default: 0.0
@@ -75,6 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_040013) do
     t.integer "price_sold"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "position_id"
+    t.index ["position_id"], name: "index_players_on_position_id"
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
@@ -141,6 +142,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_040013) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "notes", "players"
+  add_foreign_key "players", "positions"
   add_foreign_key "players", "teams"
   add_foreign_key "spot_places", "players"
   add_foreign_key "spot_places", "spots"

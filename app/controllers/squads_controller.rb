@@ -2,6 +2,7 @@ class SquadsController < ApplicationController
   before_action :set_squad, only: [:show, :import, :import_players]
 
   def show
+    @spots = @squad.spots.group_by { |spot| spot.row_number }
   end
 
   def import
