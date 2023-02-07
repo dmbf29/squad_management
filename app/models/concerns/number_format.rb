@@ -5,6 +5,8 @@ module NumberFormat
     attr_accessor :format_price
 
     def format_price(string_number)
+      return nil if string_number == '-' || string_number.blank?
+
       # changing "£2.5M - £5.4M" or "£5.4K" to an integer
       highest_num = string_number.split(' - ').last
       case highest_num[-1]

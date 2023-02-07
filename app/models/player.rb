@@ -37,6 +37,7 @@
 #
 class Player < ApplicationRecord
   include NumberFormat
+  include FmInfoFormat
 
   belongs_to :team
   has_many :spot_places, dependent: :destroy
@@ -54,8 +55,15 @@ class Player < ApplicationRecord
       when "Age" then :age
       when 'Name' then :name
       when "Position" then :positions
+      when "Best Pos" then :position_best
       when "Club" then :club
       when "Transfer Value" then :transfer_value
+      when "Min Fee Rls" then :release_clause
+      when "Nat" then :nationality
+      when "Home Grown Status" then :home_grown_club
+      when "Due Date" then :home_grown_date
+      when "Rec" then :recommendation
+      when "Media Description" then :media_desc
       end
     end
   end
@@ -64,6 +72,12 @@ class Player < ApplicationRecord
   def self.sanitize_value(player_info)
     # changing "£2.5M - £5.4M" or "£5.4K" to an integer
     player_info[:transfer_value] = format_price(player_info[:transfer_value])
+    player_info[:release_clause] = format_price(player_info[:release_clause])
+    # changing "Trained in nation (15-21)" to a boolean
+    player_info[:home_grown_nation] = trained_in_nation(player_info[:home_grown_club])
+    player_info[:home_grown_date] = trained_at_date(player_info[:home_grown_date])
+    # changing "Trained at club (15-21)" to a boolean
+    player_info[:home_grown_club] = trained_at_club(player_info[:home_grown_club])
     player_info
   end
 end
