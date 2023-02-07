@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_063640) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_07_033925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_063640) do
     t.date "home_grown_date"
     t.boolean "on_loan", default: false
     t.string "positions"
+    t.string "position_best"
     t.float "current_ability", default: 0.0
     t.float "potential_low", default: 0.0
     t.float "potential_high", default: 0.0
@@ -74,6 +75,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_063640) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "spot_places", force: :cascade do |t|

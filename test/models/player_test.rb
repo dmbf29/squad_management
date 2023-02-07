@@ -13,6 +13,7 @@
 #  name                   :string
 #  nationality            :string
 #  on_loan                :boolean          default(FALSE)
+#  position_best          :string
 #  positions              :string
 #  potential_high         :float            default(0.0)
 #  potential_low          :float            default(0.0)

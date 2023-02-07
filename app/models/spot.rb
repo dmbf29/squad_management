@@ -20,6 +20,7 @@
 #
 class Spot < ApplicationRecord
   belongs_to :squad
+  belongs_to :position, optional: true
   has_many :spot_places, dependent: :destroy
   has_many :players, through: :spot_places
   validates :position, presence: true, uniqueness: { scope: [:squad, :row_number] }
