@@ -1,9 +1,8 @@
 <div class="card-spot mx-3">
   <span><%= spot.name %></span>
-  <% spot.spot_places.each do |spot_place| %>
-    <div class="d-flex align-items-center">
-      <i class="fa-solid fa-grip-lines me-1"></i>
-      <span><%= spot_place.player.name %></span>
-    </div>
-  <% end %>
+  <div data-controller="sortablejs" class="h-100" data-id="<%= spot.id %>">
+    <% spot.spot_places.order(:rank).each do |spot_place| %>
+      <%= render 'spot_places/row', spot_place: spot_place %>
+    <% end %>
+  </div>
 </div>
