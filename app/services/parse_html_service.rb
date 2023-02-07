@@ -12,8 +12,8 @@ class ParseHtmlService
   end
 
   def call
-    # html = URI.open(url)
-    html = File.open('/Users/dougberks/Library/Application Support/Sports Interactive/Football Manager 2022/u23s_web4.html').read
+    # html = File.open('/Users/dougberks/Library/Application Support/Sports Interactive/Football Manager 2022/u23s_web4.html').read
+    html = URI.open(url)
     doc = Nokogiri::HTML.parse(html, nil, "utf-8")
     @keys = doc.search('table tr').first.text.split("\n\r\n\t").map(&:strip)
     @keys = Player.sanitize_keys(@keys)

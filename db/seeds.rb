@@ -76,6 +76,3 @@ end
   Spot.create!(spots)
 end
 puts "... created #{Spot.count} spots."
-
-url = "https://res.cloudinary.com/dmbf29/raw/upload/v1675667301/development/78pyio19vku20jpbarskk66dulkg.html"
-ParseHtmlService.new(url: url, squad: Squad.first).call
