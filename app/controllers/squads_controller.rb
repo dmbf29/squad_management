@@ -12,7 +12,6 @@ class SquadsController < ApplicationController
     @squad.update(squad_params)
     if @squad.uploads.attached?
       url = "http://res.cloudinary.com/#{ENV['CLOUDINARY_NAME']}/raw/upload/v1/development/#{@squad.uploads.last.key}.html"
-      # ParseHtmlService.new(squad: @squad, url: Cloudinary::Utils.cloudinary_url(@squad.uploads.last.url)).call
       ParseHtmlService.new(squad: @squad, url: url).call
       flash[:notice] = "Players imported from HTML"
     else

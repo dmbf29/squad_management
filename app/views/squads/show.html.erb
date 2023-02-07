@@ -1,8 +1,31 @@
 <div class="container mt-3">
   <%= render 'squads/header', squad: @squad %>
-  <%= link_to import_squad_path(@squad), class: 'btn btn-secondary my-2' do %>
-    <span><i class="fa-solid fa-user-plus"></i> Import/Update players</span>
-  <% end %>
+  <div class="d-flex justify-content-end">
+    <button type="button" class='btn btn-light border-secondary my-2' data-bs-toggle="modal" data-bs-target="#importModal">
+      <i class="fa-solid fa-user-plus"></i> Import/Update
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="importModalLabel">Import HTML</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for @squad, url: import_players_squad_path(@squad), method: :post do |f| %>
+              <div class="col-12">
+                <%= f.input :uploads, as: :file %>
+              </div>
+              <div class="col-12">
+                <%= f.submit "Import", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <% @spots.each do |row_number, spots| %>
     <div class="d-flex">
       <% spots.each do |spot| %>

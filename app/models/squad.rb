@@ -32,4 +32,8 @@ class Squad < ApplicationRecord
     spot = spots.find_by(position: player.position)
     SpotPlace.create!(spot: spot, player: player) if spot
   end
+
+  def last_upload_url
+    "http://res.cloudinary.com/#{ENV['CLOUDINARY_NAME']}/raw/upload/v1/#{Rails.env}/#{uploads.last.key}.html"
+  end
 end
