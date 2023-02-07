@@ -5,10 +5,14 @@ module FmInfoFormat
     attr_accessor :trained_at_club, :trained_at_nation
 
     def trained_at_club(string)
+      return false if string == '-' || string.blank?
+
       string.match?(/club/)
     end
 
     def trained_in_nation(string)
+      return false if string == '-' || string.blank?
+
       string.match?(/nation/)
     end
 
@@ -20,6 +24,12 @@ module FmInfoFormat
       # bc of month/year/date 🤯
       dates = date_string.split('/')
       Date.new(dates[2].to_i, dates[0].to_i, dates[1].to_i)
+    end
+
+    def on_loan(string)
+      return false if string == '-' || string.blank?
+
+      string.match?(/Out On Loan/)
     end
   end
 end

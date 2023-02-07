@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_040013) do
     t.boolean "home_grown_club", default: false
     t.date "home_grown_date"
     t.boolean "on_loan", default: false
+    t.string "playing_time"
     t.string "positions"
     t.string "position_best"
     t.float "current_ability", default: 0.0
