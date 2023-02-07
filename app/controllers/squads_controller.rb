@@ -1,6 +1,8 @@
 class SquadsController < ApplicationController
-  before_action :set_squad, only: [:import, :import_players]
+  before_action :set_squad, only: [:show, :import, :import_players]
 
+  def show
+  end
 
   def import
   end

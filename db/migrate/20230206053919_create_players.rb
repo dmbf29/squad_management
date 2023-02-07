@@ -6,7 +6,9 @@ class CreatePlayers < ActiveRecord::Migration[7.0]
       t.boolean :home_grown_club, default: false
       t.date :home_grown_date
       t.boolean :on_loan, default: false
+      t.string :playing_time
       t.string :positions
+      t.string :position_best
       t.float :current_ability, default: 0
       t.float :potential_low, default: 0
       t.float :potential_high, default: 0

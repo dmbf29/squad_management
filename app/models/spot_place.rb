@@ -3,7 +3,7 @@
 # Table name: spot_places
 #
 #  id         :bigint           not null, primary key
-#  position   :integer
+#  rank       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  player_id  :bigint           not null
@@ -22,10 +22,10 @@
 class SpotPlace < ApplicationRecord
   belongs_to :spot
   belongs_to :player
-  validates :position, presence: true, uniqueness: { scope: :spot }
-  before_commit :check_position
+  validates :rank, presence: true, uniqueness: { scope: :spot }
+  before_commit :check_rank
 
-  def check_position
-    self.position = spot.spot_places + 1 if position.nil?
+  def check_rank
+    self.rank = spot.spot_places + 1 if rank.nil?
   end
 end
