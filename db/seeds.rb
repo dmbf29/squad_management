@@ -43,17 +43,17 @@ puts "... created #{Position.count} positions."
 puts 'Creating spots...'
 [burnley_squad, burnley_utwenty].each do |squad|
   spots = [
-    { name: 'FW', position: 1, row_number: 1, squad: squad },
-    { name: 'FW', position: 2, row_number: 1, squad: squad },
-    { name: 'GK', position: 3, row_number: 1, squad: squad },
-    { name: 'CAM', position: 1, row_number: 2, squad: squad },
-    { name: 'CM', position: 2, row_number: 2, squad: squad },
-    { name: 'BBM', position: 3, row_number: 2, squad: squad },
-    { name: 'DLP', position: 4, row_number: 2, squad: squad },
-    { name: 'LB', position: 1, row_number: 3, squad: squad },
-    { name: 'CB', position: 2, row_number: 3, squad: squad },
-    { name: 'CB', position: 3, row_number: 3, squad: squad },
-    { name: 'RB', position: 4, row_number: 3, squad: squad },
+    { name: 'FW', rank: 1, row_number: 1, squad: squad, position: Position.find_by(name: 'ST (C)') },
+    { name: 'FW', rank: 2, row_number: 1, squad: squad, position: Position.find_by(name: 'ST (C)') },
+    { name: 'GK', rank: 3, row_number: 1, squad: squad, position: Position.find_by(name: 'GK') },
+    { name: 'CAM', rank: 1, row_number: 2, squad: squad, position: Position.find_by(name: 'AM (C)') },
+    { name: 'CM', rank: 2, row_number: 2, squad: squad, position: Position.find_by(name: 'M (C)') },
+    { name: 'BBM', rank: 3, row_number: 2, squad: squad, position: Position.find_by(name: 'M (C)') },
+    { name: 'DM', rank: 4, row_number: 2, squad: squad, position: Position.find_by(name: 'DM') },
+    { name: 'LB', rank: 1, row_number: 3, squad: squad, position: Position.find_by(name: 'D (L)') },
+    { name: 'CB', rank: 2, row_number: 3, squad: squad, position: Position.find_by(name: 'D (C)') },
+    { name: 'CB', rank: 3, row_number: 3, squad: squad, position: Position.find_by(name: 'D (C)') },
+    { name: 'RB', rank: 4, row_number: 3, squad: squad, position: Position.find_by(name: 'D (R)') },
   ]
   Spot.create!(spots)
 end
@@ -61,21 +61,21 @@ end
 # Watford Positions
 [watford_squad, watford_utwenty].each do |squad|
   spots = [
-    { name: 'LW', position: 1, row_number: 1, squad: squad },
-    { name: 'FW', position: 2, row_number: 1, squad: squad },
-    { name: 'RW', position: 3, row_number: 1, squad: squad },
-    { name: 'GK', position: 4, row_number: 1, squad: squad },
-    { name: 'CM', position: 1, row_number: 2, squad: squad },
-    { name: 'CM', position: 2, row_number: 2, squad: squad },
-    { name: 'DM', position: 3, row_number: 2, squad: squad },
-    { name: 'LB', position: 1, row_number: 3, squad: squad },
-    { name: 'CB', position: 2, row_number: 3, squad: squad },
-    { name: 'CB', position: 3, row_number: 3, squad: squad },
-    { name: 'RB', position: 4, row_number: 3, squad: squad },
+    { name: 'LW', rank: 1, row_number: 1, squad: squad, position: Position.find_by(name: 'AM (L)') },
+    { name: 'FW', rank: 2, row_number: 1, squad: squad, position: Position.find_by(name: 'ST (C)') },
+    { name: 'RW', rank: 3, row_number: 1, squad: squad, position: Position.find_by(name: 'AM (R)') },
+    { name: 'GK', rank: 4, row_number: 1, squad: squad, position: Position.find_by(name: 'GK') },
+    { name: 'CM', rank: 1, row_number: 2, squad: squad, position: Position.find_by(name: 'M (C)') },
+    { name: 'CM', rank: 2, row_number: 2, squad: squad, position: Position.find_by(name: 'M (C)') },
+    { name: 'DM', rank: 3, row_number: 2, squad: squad, position: Position.find_by(name: 'DM') },
+    { name: 'LB', rank: 1, row_number: 3, squad: squad, position: Position.find_by(name: 'D (L)') },
+    { name: 'CB', rank: 2, row_number: 3, squad: squad, position: Position.find_by(name: 'D (C)') },
+    { name: 'CB', rank: 3, row_number: 3, squad: squad, position: Position.find_by(name: 'D (C)') },
+    { name: 'RB', rank: 4, row_number: 3, squad: squad, position: Position.find_by(name: 'D (R)') },
   ]
   Spot.create!(spots)
 end
 puts "... created #{Spot.count} spots."
 
-url = "https://res.cloudinary.com/dmbf29/raw/upload/v1675667301/development/78pyio19vku20jpbarskk66dulkg.html"
-ParseHtmlService.new(url: url, squad: Squad.find(1)).call
+# url = "https://res.cloudinary.com/dmbf29/raw/upload/v1675667301/development/78pyio19vku20jpbarskk66dulkg.html"
+# ParseHtmlService.new(url: url, squad: Squad.find(1)).call

@@ -3,7 +3,7 @@
 # Table name: spot_places
 #
 #  id         :bigint           not null, primary key
-#  position   :integer
+#  rank       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  player_id  :bigint           not null

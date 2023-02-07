@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_033925) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_07_040013) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,22 +84,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_033925) do
   end
 
   create_table "spot_places", force: :cascade do |t|
-    t.integer "position"
     t.bigint "spot_id", null: false
     t.bigint "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rank"
     t.index ["player_id"], name: "index_spot_places_on_player_id"
     t.index ["spot_id"], name: "index_spot_places_on_spot_id"
   end
 
   create_table "spots", force: :cascade do |t|
     t.string "name"
-    t.integer "position"
     t.integer "row_number"
     t.bigint "squad_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "position_id"
+    t.integer "rank"
+    t.index ["position_id"], name: "index_spots_on_position_id"
     t.index ["squad_id"], name: "index_spots_on_squad_id"
   end
 
@@ -141,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_033925) do
   add_foreign_key "players", "teams"
   add_foreign_key "spot_places", "players"
   add_foreign_key "spot_places", "spots"
+  add_foreign_key "spots", "positions"
   add_foreign_key "spots", "squads"
   add_foreign_key "squads", "teams"
   add_foreign_key "teams", "users"
