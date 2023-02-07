@@ -25,4 +25,11 @@ class Squad < ApplicationRecord
   validates :name, presence: true
   validates :total_rows, presence: true, numericality: { greater_than: 0, only_integer: true }
   has_many_attached :uploads
+
+  def add_player_in_spot(player)
+    return if spots.empty? || player.nil?
+
+    spot = spots.find_by(position: player.position)
+    SpotPlace.create!(spot: spot, player: player) if spot
+  end
 end

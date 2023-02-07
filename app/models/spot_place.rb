@@ -23,9 +23,9 @@ class SpotPlace < ApplicationRecord
   belongs_to :spot
   belongs_to :player
   validates :rank, presence: true, uniqueness: { scope: :spot }
-  before_commit :check_rank
+  before_validation :check_rank
 
   def check_rank
-    self.rank = spot.spot_places + 1 if rank.nil?
+    self.rank = spot.spot_places.count + 1 if rank.nil?
   end
 end
