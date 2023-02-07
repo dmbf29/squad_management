@@ -1,5 +1,6 @@
 puts 'Cleaning DB...'
 Team.destroy_all
+Position.destroy_all
 
 puts 'Getting Admin users...'
 doug = User.find_by(email: 'douglasmberkley@gmail.com') || User.create(email: 'douglasmberkley@gmail.com', password: ENV['ADMIN_PASSWORD'], admin: true)
@@ -17,6 +18,26 @@ burnley_utwenty = Squad.create!(name: 'U23', team: burnley)
 watford_squad = Squad.create!(name: 'Senior', team: watford)
 watford_utwenty = Squad.create!(name: 'U23', team: watford)
 puts "... created #{Squad.count} squads."
+
+puts 'Creating all possible positions'
+positions = [
+  'GK',
+  'D (R)',
+  'D (L)',
+  'D (C)',
+  'WB (R)',
+  'WB (L)',
+  'DM',
+  'M (R)',
+  'M (L)',
+  'M (C)',
+  'AM (R)',
+  'AM (L)',
+  'AM (C)',
+  'ST (C)'
+]
+positions.each { |position| Position.create!(name: position) }
+puts "... created #{Position.count} positions."
 
 # Burnley Positions
 puts 'Creating spots...'

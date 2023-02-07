@@ -8,4 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Position < ApplicationRecord
+  has_many :spots
+  validates :name, presence: true, uniqueness: true
 end
