@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   end
   resources :squads, only: [:show] do
     member do
-      get :import
-      post :import_players
+      post :import
     end
   end
 end
