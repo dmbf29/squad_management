@@ -1,5 +1,8 @@
 <div class="container mt-3">
   <%= render 'squads/header', squad: @squad %>
+  <%= link_to import_squad_path(@squad), class: 'btn btn-secondary my-2' do %>
+    <span><i class="fa-solid fa-user-plus"></i> Import/Update players</span>
+  <% end %>
   <% @spots.each do |row_number, spots| %>
     <div class="d-flex">
       <% spots.each do |spot| %>
