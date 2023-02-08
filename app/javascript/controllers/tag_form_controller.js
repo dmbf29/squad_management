@@ -13,7 +13,6 @@ export default class extends Controller {
     })
       .then((response) => response.text())
       .then((data) => {
-        console.log(data);
         this.element.outerHTML = data;
       });
   }
@@ -28,8 +27,7 @@ export default class extends Controller {
     })
       .then((response) => response.text())
       .then((data) => {
-        console.log(data);
-        this.element.outerHTML = data;
+        this.element.parentElement.outerHTML = data;
       });
   }
 }

@@ -80,10 +80,10 @@ puts "... created #{Spot.count} spots."
 
 puts 'Creating tags...'
 tags = [
-  { abbrev: 'Loa', name: 'Listed for Loan', font_awesome: 'fa-solid fa-repeat', color: '#279AF1' },
-  { abbrev: 'Sel', name: 'Listed to Sell', font_awesome: 'fa-solid fa-sack-dollar', color: '#EA526F' },
+  { abbrev: 'Loa', name: 'Loan Listed', font_awesome: 'fa-solid fa-repeat', color: '#279AF1' },
+  { abbrev: 'Sel', name: 'Transfer List', font_awesome: 'fa-solid fa-sack-dollar', color: '#EA526F' },
   { abbrev: 'Yth', name: 'Youth', font_awesome: 'fa-solid fa-seedling', color: '#03C7B4' },
-  { abbrev: 'Inc', name: 'Incoming player', font_awesome: 'fa-solid fa-right-to-bracket', color: '#F4D58D' }
+  { abbrev: 'Inc', name: 'Incoming', font_awesome: 'fa-solid fa-right-to-bracket', color: '#F4D58D' }
 ]
 Tag.create!(tags)
 puts "... created #{Tag.count} tags."

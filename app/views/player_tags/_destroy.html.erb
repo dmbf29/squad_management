@@ -1,7 +1,10 @@
-<% if player_tag.tag.font_awesome %>
-  <%= link_to player_tag_path(player_tag), data: { turbo_method: :delete, controller: 'tag-form', action: 'click->tag-form#destroy', id: player_tag.id }, class: 'tag-player' do %>
-    <i class="<%= tag.font_awesome %>"></i>
+<div class='text-center'>
+  <% if player_tag.tag.font_awesome %>
+    <%= link_to player_tag_path(player_tag), data: { turbo_method: :delete, controller: 'tag-form', action: 'click->tag-form#destroy', id: player_tag.id }, class: 'text-decoration-none' do %>
+      <i class="<%= tag.font_awesome %> tag-player" style="background-color: <%= tag.color %>"></i>
+    <% end %>
+  <% else %>
+    <%= link_to player_tag.tag.abbrev, player_tag_path(player_tag), data: { turbo_method: :delete, remote: true }, class: 'tag-player' %>
   <% end %>
-<% else %>
-  <%= link_to player_tag.tag.abbrev, player_tag_path(player_tag), data: { turbo_method: :delete, remote: true }, class: 'tag-player' %>
-<% end %>
+  <legend class="col-form-label pt-0"><small><%= player_tag.tag.name %></small></legend>
+</div>

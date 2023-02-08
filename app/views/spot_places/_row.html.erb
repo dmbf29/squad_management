@@ -3,8 +3,16 @@
     <i class="fa-solid fa-grip me-1 handle"></i>
     <small class='text-nowrap' data-bs-toggle="modal" data-bs-target="#playerModal-<%= spot_place.player.id %>" style="color: <%= spot_place.player.text_color %>"><%= spot_place.player.name %></small>
   </div>
-  <div>
-    <%# put tags heres %>
+  <div class='d-flex justify-content-end aligh-items-center'>
+    <% spot_place.player.tags.each do |tag| %>
+      <span class="tag-player">
+        <% if tag.font_awesome %>
+          <i class="<%= tag.font_awesome %>"></i>
+        <% else %>
+          <%= tag.abbrev %>
+        <% end %>
+      </span>
+    <% end %>
   </div>
 </div>
 <%= render 'players/modal', spot_place: spot_place, player: spot_place.player, tags: @tags, player_tag: @player_tag %>
