@@ -1,6 +1,8 @@
-<div class="card-spot mx-3">
-  <span><%= spot.name %></span>
-  <div data-controller="sortablejs" class="h-100" data-id="<%= spot.id %>">
+<div class="card-spot mx-3 flex-same-size">
+  <div class="d-flex justify-content-center py-2 text-primary border-bottom">
+    <span class='fw-bold'><%= spot.name %></span>
+  </div>
+  <div data-controller="sortablejs" class="h-100 mt-3" data-id="<%= spot.id %>">
     <% spot.spot_places.order(:rank).each do |spot_place| %>
       <%= render 'spot_places/row', spot_place: spot_place %>
     <% end %>
