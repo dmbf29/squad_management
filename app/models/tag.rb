@@ -2,13 +2,14 @@
 #
 # Table name: tags
 #
-#  id         :bigint           not null, primary key
-#  abbrev     :string
-#  color      :string
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint
+#  id           :bigint           not null, primary key
+#  abbrev       :string
+#  color        :string
+#  font_awesome :string
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :bigint
 #
 # Indexes
 #
@@ -22,4 +23,5 @@ class Tag < ApplicationRecord
   belongs_to :user, optional: true
   validates :abbrev, presence: true, length: { minimum: 1, maximum: 3 }
   validates :color, presence: true
+  scope :created_by_app_or_user, ->(user) { where(user: nil).or(user.tags) }
 end

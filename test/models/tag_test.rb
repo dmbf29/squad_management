@@ -2,13 +2,14 @@
 #
 # Table name: tags
 #
-#  id         :bigint           not null, primary key
-#  abbrev     :string
-#  color      :string
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint
+#  id           :bigint           not null, primary key
+#  abbrev       :string
+#  color        :string
+#  font_awesome :string
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :bigint
 #
 # Indexes
 #

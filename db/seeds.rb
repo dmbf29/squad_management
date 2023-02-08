@@ -78,6 +78,7 @@ end
 end
 puts "... created #{Spot.count} spots."
 
+puts 'Creating tags...'
 tags = [
   { abbrev: 'Loa', name: 'Listed for Loan', font_awesome: 'fa-solid fa-repeat', color: '#279AF1' },
   { abbrev: 'Sel', name: 'Listed to Sell', font_awesome: 'fa-solid fa-sack-dollar', color: '#EA526F' },
@@ -85,4 +86,4 @@ tags = [
   { abbrev: 'Inc', name: 'Incoming player', font_awesome: 'fa-solid fa-seedlin', color: '#F4D58D' }
 ]
 Tag.create!(tags)
-puts ''
+puts "... created #{Tag.count} tags."

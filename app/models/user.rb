@@ -25,4 +25,5 @@ class User < ApplicationRecord
   has_many :teams, dependent: :destroy
   has_many :players, through: :teams
   has_many :squads, through: :teams
+  has_many :tags, dependent: :destroy
 end

@@ -1,0 +1,23 @@
+<div class="d-flex align-items-center justify-content-evenly">
+  <% player.player_tags.each do |player_tag| %>
+    <% if player_tag.tag.font_awesome %>
+      <%= link_to player_tag_path(player_tag), data: { turbo_method: :delete }, class: 'tag-player' do %>
+        <i class="<%= tag.font_awesome %>"></i>
+      <% end %>
+    <% else %>
+      <%= link_to player_tag.tag.abbrev, player_tag_path(player_tag), data: { turbo_method: :delete }, class: 'tag-player' %>
+    <% end %>
+  <% end %>
+  <% tags.where.not(id: player.tags).each do |tag| %>
+    <div id="player-<%= player.id %>-tag-<%= tag.id %>">
+      <%= simple_form_for [player, player_tag] do |f| %>
+        <fieldset class="form-group check_boxes optional player_tags">
+          <div class="tag-item">
+            <input onclick='this.form.submit()' class="form-check-input check_boxes optional tag-selector" type="checkbox" value="<%= tag.id %>" name="player_tag[tag_id]" id="player-<%= player.id %>-tag-<%= tag.id %>-input">
+            <label data-bs-toggle="tooltip" data-bs-title="<%= tag.name %>" class="form-check-label collection_check_boxes" for="player-<%= player.id %>-tag-<%= tag.id %>-input"><%= tag.abbrev %></label>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  <% end %>
+</div>

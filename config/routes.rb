@@ -15,5 +15,8 @@ Rails.application.routes.draw do
       patch :update_places
     end
   end
-  resources :players, only: [:update]
+  resources :players, only: [:update] do
+    resources :player_tags, only: [:create]
+  end
+  resources :player_tags, only: [:destroy]
 end
