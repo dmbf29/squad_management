@@ -1,4 +1,10 @@
-<div class="d-flex align-items-center spot-place-row" data-id="<%= spot_place.id %>">
-  <i class="fa-solid fa-grip me-1 handle"></i>
-  <small class='text-nowrap'><%= spot_place.player.name %></small>
+<div class="d-flex align-items-center justify-content-between spot-place-row" data-id="<%= spot_place.id %>">
+  <div class="div">
+    <i class="fa-solid fa-grip me-1 handle"></i>
+    <small class='text-nowrap' data-bs-toggle="modal" data-bs-target="#playerModal-<%= spot_place.player.id %>"><%= spot_place.player.name %></small>
+  </div>
+  <div>
+    <%# put tags heres %>
+  </div>
 </div>
+<%= render 'players/modal', spot_place: spot_place, player: spot_place.player %>

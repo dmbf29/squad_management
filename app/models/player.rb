@@ -22,6 +22,7 @@
 #  recommendation         :string
 #  release_clause         :integer
 #  release_clause_special :integer
+#  text_color             :string
 #  transfer_value         :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null

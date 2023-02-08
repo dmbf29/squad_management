@@ -15,4 +15,5 @@ Rails.application.routes.draw do
       patch :update_places
     end
   end
+  resources :players, only: [:update]
 end
