@@ -48,6 +48,8 @@ class Player < ApplicationRecord
   has_many :spot_places, dependent: :destroy
   has_many :spots, through: :spot_places
   has_many :squads, through: :spots
+  has_many :player_tags, dependent: :destroy
+  has_many :tags, through: :player_tags
   validates :name, presence: true
   UPDATEABLE_HTML_ATTRIBUTES = [
     :home_grown_nation,

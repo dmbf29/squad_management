@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_034651) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_08_031625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,15 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_034651) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_notes_on_player_id"
-  end
-
-  create_table "player_tags", force: :cascade do |t|
-    t.bigint "tag_id", null: false
-    t.bigint "player_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["player_id"], name: "index_player_tags_on_player_id"
-    t.index ["tag_id"], name: "index_player_tags_on_tag_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -126,16 +117,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_034651) do
     t.index ["team_id"], name: "index_squads_on_team_id"
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string "abbrev"
-    t.string "name"
-    t.string "color"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tags_on_user_id"
-  end
-
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "currency", default: "£"
@@ -162,8 +143,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_034651) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "notes", "players"
-  add_foreign_key "player_tags", "players"
-  add_foreign_key "player_tags", "tags"
   add_foreign_key "players", "positions"
   add_foreign_key "players", "teams"
   add_foreign_key "spot_places", "players"
@@ -171,6 +150,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_034651) do
   add_foreign_key "spots", "positions"
   add_foreign_key "spots", "squads"
   add_foreign_key "squads", "teams"
-  add_foreign_key "tags", "users"
   add_foreign_key "teams", "users"
 end
