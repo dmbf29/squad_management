@@ -1,0 +1,6 @@
+.handle {
+  color: $gray;
+  &:hover{
+    cursor: grab;
+  }
+}
