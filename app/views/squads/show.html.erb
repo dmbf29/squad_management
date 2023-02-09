@@ -3,7 +3,7 @@
   <%= render 'squads/subheader', squad: @squad %>
   <% @spots.each do |row_number, spots| %>
     <div class="d-flex justify-content-evenly mb-5">
-      <% spots.each do |spot| %>
+      <% spots.sort_by(&:rank).each do |spot| %>
         <%= render 'spots/card', spot: spot %>
       <% end %>
     </div>

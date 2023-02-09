@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       delete :empty
     end
   end
-  resources :spots, only: [] do
+  resources :spots, only: [:update] do
     member do
       patch :update_places
     end
