@@ -4,8 +4,11 @@
 
 import { application } from "./application"
 
-import SortablejsController from "./sortablejs_controller"
-application.register("sortablejs", SortablejsController)
+import SortableCardsController from "./sortable_cards_controller"
+application.register("sortable-cards", SortableCardsController)
+
+import SortableRowsController from "./sortable_rows_controller"
+application.register("sortable-rows", SortableRowsController)
 
 import TagFormController from "./tag_form_controller"
 application.register("tag-form", TagFormController)

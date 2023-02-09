@@ -1,6 +1,6 @@
 class SpotsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:update_places]
-  skip_before_action :verify_authenticity_token, only: [:update_places]
+  skip_before_action :authenticate_user!, only: [:update_places, :update_all]
+  skip_before_action :verify_authenticity_token, only: [:update_places, :update_all]
 
   def update_places
     # Followed this: https://prabinpoudel.com.np/notes/update-multiple-records-at-once-in-rails/
@@ -9,6 +9,14 @@ class SpotsController < ApplicationController
     grouped_places = places.index_by { |user| user[:id] }
     SpotPlace.update(grouped_places.keys, grouped_places.values)
     render json: @spot
+  end
+
+  def update_all
+    # Followed this: https://prabinpoudel.com.np/notes/update-multiple-records-at-once-in-rails/
+    places = params[:spots].map { |param| { id: param[:id], rank: param[:rank], row_number: param[:row_number] } }
+    grouped_spots = places.index_by { |user| user[:id] }
+    Spot.update(grouped_spots.keys, grouped_spots.values)
+    render json: { status: 'updated' }
   end
 
   def update
