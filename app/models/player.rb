@@ -22,6 +22,7 @@
 #  recommendation         :string
 #  release_clause         :integer
 #  release_clause_special :integer
+#  text_color             :string
 #  transfer_value         :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -47,7 +48,10 @@ class Player < ApplicationRecord
   has_many :spot_places, dependent: :destroy
   has_many :spots, through: :spot_places
   has_many :squads, through: :spots
+  has_many :player_tags, dependent: :destroy
+  has_many :tags, through: :player_tags
   validates :name, presence: true
+  COLORS = ["#DAD2D8", "#EA526F", "#279AF1", '#F4D58D', '#FA7E61', '#3700B3']
   UPDATEABLE_HTML_ATTRIBUTES = [
     :home_grown_nation,
     :home_grown_club,

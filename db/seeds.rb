@@ -1,6 +1,7 @@
 puts 'Cleaning DB...'
 Team.destroy_all
 Position.destroy_all
+Tag.destroy_all
 
 puts 'Getting Admin users...'
 doug = User.find_by(email: 'douglasmberkley@gmail.com') || User.create(email: 'douglasmberkley@gmail.com', password: ENV['ADMIN_PASSWORD'], admin: true)
@@ -76,3 +77,13 @@ end
   Spot.create!(spots)
 end
 puts "... created #{Spot.count} spots."
+
+puts 'Creating tags...'
+tags = [
+  { abbrev: 'Loa', name: 'Loan(ed)', font_awesome: 'fa-solid fa-repeat', color: '#279AF1' },
+  { abbrev: 'Sel', name: 'List(ed)', font_awesome: 'fa-solid fa-sack-dollar', color: '#EA526F' },
+  { abbrev: 'Yth', name: 'Youth', font_awesome: 'fa-solid fa-seedling', color: '#03C7B4' },
+  { abbrev: 'Inc', name: 'Incoming', font_awesome: 'fa-solid fa-right-to-bracket', color: '#F4D58D' }
+]
+Tag.create!(tags)
+puts "... created #{Tag.count} tags."

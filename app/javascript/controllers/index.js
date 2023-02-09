@@ -2,7 +2,10 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import SortablejsController from "./sortablejs_controller";
-application.register("sortablejs", SortablejsController);
+import SortablejsController from "./sortablejs_controller"
+application.register("sortablejs", SortablejsController)
+
+import TagFormController from "./tag_form_controller"
+application.register("tag-form", TagFormController)

@@ -1,0 +1,15 @@
+<%= simple_form_for [player, player_tag], remote: true, html: { 'data-controller': 'tag-form' } do |f| %>
+  <fieldset class="form-group check_boxes optional player_tags">
+    <div class="tag-item text-center">
+      <input data-action="click->tag-form#submit" class="form-check-input check_boxes optional tag-selector" type="checkbox" value="<%= tag.id %>" name="player_tag[tag_id]" id="player-<%= player.id %>-tag-<%= tag.id %>-input">
+      <label data-bs-toggle="tooltip" data-bs-title="<%= tag.name %>" class="form-check-label collection_check_boxes tag-player" for="player-<%= player.id %>-tag-<%= tag.id %>-input">
+        <% if tag.font_awesome %>
+          <i class="<%= tag.font_awesome %>"></i>
+        <% else %>
+          <%= tag.abbrev %>
+        <% end %>
+      </label>
+      <legend class="col-form-label pt-0"><small><%= tag.name %></small></legend>
+    </div>
+  </fieldset>
+<% end %>

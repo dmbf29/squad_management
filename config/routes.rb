@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :squads, only: [:show] do
     member do
       post :import
+      delete :empty
     end
   end
   resources :spots, only: [] do
@@ -15,4 +16,8 @@ Rails.application.routes.draw do
       patch :update_places
     end
   end
+  resources :players, only: [:update] do
+    resources :player_tags, only: [:create]
+  end
+  resources :player_tags, only: [:destroy]
 end
