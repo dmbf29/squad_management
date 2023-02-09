@@ -5,3 +5,19 @@
 .text-small {
   font-size: 0.7em;
 }
+
+.text-transparent {
+  color: transparent;
+}
+
+.text-darker-gray {
+  color: $darker-gray;
+}
+
+.text-dark-gray {
+  color: $dark-gray;
+}
+
+.text-gray {
+  color: $gray;
+}

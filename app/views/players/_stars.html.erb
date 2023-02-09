@@ -1,0 +1,8 @@
+<div class="player-stars d-flex <%= 'position-absolute' if special %>">
+  <% number.truncate.times do %>
+    <i class="fa-solid fa-star <%= 'text-gray' if special %>"></i>
+  <% end %>
+  <% unless number.round == number.truncate %>
+    <i class="fa-solid fa-star-half <%= 'text-gray' if special %>"></i>
+  <% end %>
+</div>

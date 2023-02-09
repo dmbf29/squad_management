@@ -7,12 +7,11 @@
         <div class="d-flex me-1">
           <%= spot_place.player.age %>
         </div>
-        <% spot_place.player.current_ability.truncate.times do %>
-          <i class="fa-solid fa-star"></i>
-        <% end %>
-        <% unless spot_place.player.current_ability.round == spot_place.player.current_ability.truncate %>
-          <i class="fa-solid fa-star-half"></i>
-        <% end %>
+        <div class="position-relative">
+          <div class="text-transparent">stars</div>
+          <%= render 'players/stars', number: spot_place.player.potential_high, special: true %>
+          <%= render 'players/stars', number: spot_place.player.current_ability, special: false %>
+        </div>
       </div>
     </div>
   </div>
