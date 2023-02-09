@@ -11,7 +11,7 @@
           <%= f.input :name %>
           <%= f.input :row_number %>
           <%= f.input :rank %>
-          <%= f.association :positon, collection: Position.order(:name) %>
+          <%= f.association :position, collection: Position.order(:name) %>
           <%= f.submit class: 'btn btn-primary mt-2' %>
         <% end %>
       </div>

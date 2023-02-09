@@ -10,4 +10,16 @@ class SpotsController < ApplicationController
     SpotPlace.update(grouped_places.keys, grouped_places.values)
     render json: @spot
   end
+
+  def update
+    @spot = Spot.find(params[:id])
+    @spot.update(spot_params)
+    redirect_to spot_path(@spot)
+  end
+
+  private
+
+  def spot_params
+    params.require(:spot).permit(:name, :row_number, :rank, :position_id)
+  end
 end
