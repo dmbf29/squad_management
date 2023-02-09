@@ -51,6 +51,7 @@ class Player < ApplicationRecord
   has_many :player_tags, dependent: :destroy
   has_many :tags, through: :player_tags
   validates :name, presence: true
+  COLORS = ["#DAD2D8", "#EA526F", "#279AF1", '#F4D58D', '#FA7E61', '#3700B3']
   UPDATEABLE_HTML_ATTRIBUTES = [
     :home_grown_nation,
     :home_grown_club,
