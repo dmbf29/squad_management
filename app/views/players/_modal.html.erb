@@ -6,6 +6,11 @@
         <div class="d-flex align-items-end">
           <h1 class="modal-title fs-5 me-2" id="exampleModalLabel"><%= player.name %></h1>
           <small><%= player.positions %></small>
+          <small>
+            <%= link_to player_path(player, squad_id: squad.id), class: "tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
+              <i class="fa-solid fa-times text-light ms-2"></i>
+            <% end %>
+          </small>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

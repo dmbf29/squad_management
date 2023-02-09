@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       patch :update_all
     end
   end
-  resources :players, only: [:update] do
+  resources :players, only: [:update, :destroy] do
     resources :player_tags, only: [:create]
   end
   resources :player_tags, only: [:destroy]

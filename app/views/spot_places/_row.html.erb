@@ -17,4 +17,4 @@
   </div>
   <%= render 'spot_places/tags', player: spot_place.player  %>
 </div>
-<%= render 'players/modal', spot_place: spot_place, player: spot_place.player, tags: @tags, player_tag: @player_tag %>
+<%= render 'players/modal', spot_place: spot_place, player: spot_place.player, tags: @tags, player_tag: @player_tag, squad: spot_place.spot.squad %>
