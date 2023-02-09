@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center justify-content-evenly">
+<div class="d-flex align-items-center justify-content-evenly my-1">
   <% player.player_tags.each do |player_tag| %>
     <%= render 'player_tags/destroy', player_tag: player_tag, tag: player_tag.tag %>
   <% end %>
