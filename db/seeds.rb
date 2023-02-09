@@ -85,7 +85,7 @@ tags = [
   { abbrev: 'Yth', name: 'Youth', font_awesome: 'fa-solid fa-seedling', color: '#03C7B4' },
   { abbrev: 'Inc', name: 'Incoming', font_awesome: 'fa-solid fa-right-to-bracket', color: '#F4D58D' },
   { abbrev: 'Kng', name: 'Untouchable', font_awesome: 'fa-solid fa-crown', color: '#F4D58D' },
-  { abbrev: 'Wat', name: 'Watch', font_awesome: 'fa-solid fa-eye', color: '#FFFFF' }
+  { abbrev: 'Wat', name: 'Watch', font_awesome: 'fa-solid fa-eye', color: '#FFFF' }
 ]
 Tag.create!(tags)
 puts "... created #{Tag.count} tags."
