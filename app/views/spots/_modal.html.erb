@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade" id="spotModal-<%= spot.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for spot do |f| %>
+          <%= f.input :name %>
+          <%= f.input :row_number %>
+          <%= f.input :rank %>
+          <%= f.association :positon, collection: Position.order(:name) %>
+          <%= f.submit class: 'btn btn-primary mt-2' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
