@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :squads, only: [:show] do
     member do
       post :import
+      delete :empty
     end
   end
   resources :spots, only: [] do
