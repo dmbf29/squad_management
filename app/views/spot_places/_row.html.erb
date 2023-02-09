@@ -1,11 +1,24 @@
-<div class="d-flex align-items-center justify-content-between spot-place-row" data-id="<%= spot_place.id %>">
-  <div class="div">
-    <i class="fa-solid fa-grip me-1 handle"></i>
-    <small class='text-nowrap' data-bs-toggle="modal" data-bs-target="#playerModal-<%= spot_place.player.id %>" style="color: <%= spot_place.player.text_color %>"><%= spot_place.player.name %></small>
+<div class="d-flex align-items-center justify-content-between spot-place-row my-1" data-id="<%= spot_place.id %>">
+  <div class="d-flex align-items-center">
+    <i class="fa-solid fa-grip me-2 handle"></i>
+    <div class="d-flex flex-column">
+      <small class='text-nowrap fw-bold' data-bs-toggle="modal" data-bs-target="#playerModal-<%= spot_place.player.id %>" style="color: <%= spot_place.player.text_color %>"><%= spot_place.player.name %></small>
+      <div class="d-flex text-small align-items-center fw-light">
+        <div class="d-flex me-1">
+          <%= spot_place.player.age %>
+        </div>
+        <% spot_place.player.current_ability.truncate.times do %>
+          <i class="fa-solid fa-star"></i>
+        <% end %>
+        <% unless spot_place.player.current_ability.round == spot_place.player.current_ability.truncate %>
+          <i class="fa-solid fa-star-half"></i>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class='d-flex justify-content-end aligh-items-center'>
     <% spot_place.player.tags.each do |tag| %>
-      <span class="tag-player">
+      <span class="tag-player" style='background-color: <%= tag.color %>'>
         <% if tag.font_awesome %>
           <i class="<%= tag.font_awesome %>"></i>
         <% else %>
