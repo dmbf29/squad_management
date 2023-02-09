@@ -1,0 +1,24 @@
+<div class='d-flex justify-content-end aligh-items-center'>
+  <% if player.home_grown_club %>
+    <span class="tag-player" style='background-color: #3700B3;color: #DAD2D8' data-bs-toggle="tooltip" data-bs-title="Home-Grown at Club">
+      <i class="fa-solid fa-house-lock"></i>
+    </span>
+  <% elsif player.home_grown_nation %>
+    <span class="tag-player" style='background-color: #3700B3;color: #DAD2D8' data-bs-toggle="tooltip" data-bs-title="Home-Grown in Nation">
+      <i class="fa-solid fa-house-flag"></i>
+    </span>
+  <% elsif player.home_grown_date %>
+    <span class="tag-player" style='background-color: #3700B3;color: #DAD2D8' data-bs-toggle="tooltip" data-bs-title="Home-Grown coming soon: <%= player.home_grown_date.strftime('%b %d, %Y') %>">
+      <i class="fa-solid fa-hourglass-half"></i>
+    </span>
+  <% end %>
+  <% player.tags.each do |tag| %>
+    <span class="tag-player" style='background-color: <%= tag.color %>' data-bs-toggle="tooltip" data-bs-title="<%= tag.name %>">
+      <% if tag.font_awesome %>
+        <i class="<%= tag.font_awesome %>"></i>
+      <% else %>
+        <%= tag.abbrev %>
+      <% end %>
+    </span>
+  <% end %>
+</div>

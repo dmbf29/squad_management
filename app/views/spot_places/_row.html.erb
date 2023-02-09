@@ -15,16 +15,6 @@
       </div>
     </div>
   </div>
-  <div class='d-flex justify-content-end aligh-items-center'>
-    <% spot_place.player.tags.each do |tag| %>
-      <span class="tag-player" style='background-color: <%= tag.color %>'>
-        <% if tag.font_awesome %>
-          <i class="<%= tag.font_awesome %>"></i>
-        <% else %>
-          <%= tag.abbrev %>
-        <% end %>
-      </span>
-    <% end %>
-  </div>
+  <%= render 'spot_places/tags', player: spot_place.player  %>
 </div>
 <%= render 'players/modal', spot_place: spot_place, player: spot_place.player, tags: @tags, player_tag: @player_tag %>

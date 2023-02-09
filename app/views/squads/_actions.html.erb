@@ -1,14 +1,12 @@
-<div class="d-flex justify-content-start mb-2">
+<div class="d-flex justify-content-start">
   <ul class="nav tabs-underlined" id="squad_tabs" role="tablist">
-    <li class="nav-item tab-underlined d-flex align-items-center" role="presentation" data-bs-toggle="modal" data-bs-target="#importModal">
+    <li class="nav-item tab-underlined d-flex align-items-start me-2" role="presentation" data-bs-toggle="modal" data-bs-target="#importModal">
       <small><i class="fa-solid fa-user-plus me-1"></i> Import/Update</small>
     </li>
-    <li class="nav-item d-flex align-items-center" role="presentation">
-      <span class="nav-link">
-        <%= link_to empty_squad_path(squad), class: "tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove all players from squad? This is irreversible."} do %>
-          <small><i class="fa-solid fa-trash"></i> Clear Squad</small>
-        <% end %>
-      </span>
+    <li class="nav-item d-flex align-items-start" role="presentation">
+      <%= link_to empty_squad_path(squad), class: "tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove all players from squad? This is irreversible."} do %>
+        <small><i class="fa-solid fa-trash"></i> Clear Squad</small>
+      <% end %>
     </li>
   </ul>
   <!-- Modal -->

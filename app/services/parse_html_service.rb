@@ -39,5 +39,6 @@ class ParseHtmlService
       player = Player.create(player_info)
       squad.add_player_in_spot(player)
     end
+    player.on_loan_color! if player.on_loan
   end
 end

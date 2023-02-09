@@ -51,7 +51,8 @@ class Player < ApplicationRecord
   has_many :player_tags, dependent: :destroy
   has_many :tags, through: :player_tags
   validates :name, presence: true
-  COLORS = ["#DAD2D8", "#EA526F", "#279AF1", '#F4D58D', '#FA7E61', '#3700B3']
+  COLORS = ["#DAD2D8", "#EA526F", "#279AF1", '#F4D58D', '#FA7E61', '#03C7B4']
+  ON_LOAN_COLOR = '#7052b4'
   UPDATEABLE_HTML_ATTRIBUTES = [
     :home_grown_nation,
     :home_grown_club,
@@ -68,6 +69,14 @@ class Player < ApplicationRecord
     :nationality
   ]
 
+  def on_loan_color!
+    if on_loan
+      self.text_color = ON_LOAN_COLOR
+    else
+      self.text_color = nil unless COLORS.include?(text_color)
+    end
+    save
+  end
   # Converting all the FM column names in the corresponding DB colmn
   def self.sanitize_keys(keys)
     keys.map! do |key|
