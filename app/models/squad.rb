@@ -29,8 +29,8 @@ class Squad < ApplicationRecord
   def add_player_in_spot(player)
     return if spots.empty? || player.nil?
 
-    spot = spots.find_by(position: player.position)
-    SpotPlace.create!(spot: spot, player: player) if spot
+    spot = spots.find_by(position: player.position) || spots.sample
+    SpotPlace.create!(spot: spot, player: player)
   end
 
   def last_upload_url

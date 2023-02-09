@@ -13,7 +13,7 @@ module FmInfoFormat
     def trained_in_nation(string)
       return false if string == '-' || string.blank?
 
-      string.match?(/nation/)
+      string.match?(/nation/) || string.match?(/club/)
     end
 
     def trained_at_date(string)
