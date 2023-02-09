@@ -9,8 +9,9 @@
       <div class="modal-body">
         <%= simple_form_for spot do |f| %>
           <%= f.input :name %>
-          <%= f.input :row_number %>
-          <%= f.input :rank %>
+          <%# This is being updated by the drag and drop now  %>
+          <%#= f.input :row_number %>
+          <%#= f.input :rank %>
           <%= f.association :position, collection: Position.order(:name) %>
           <%= f.submit class: 'btn btn-primary mt-2' %>
         <% end %>
