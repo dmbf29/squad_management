@@ -31,6 +31,19 @@ class SpotsController < ApplicationController
     redirect_to spot_path(@spot)
   end
 
+  def destroy
+    @spot = Spot.find(params[:id])
+    another_spot = @spot.squad.spots.where.not(id: @spot).sample
+    if params[:destroy_all] == 'false'
+      @spot.spot_places.each do |spot_place|
+        spot_place.spot = another_spot
+        spot_place.save
+      end
+    end
+    @spot.destroy
+    redirect_to squad_path(@spot.squad), status: :see_other
+  end
+
   private
 
   def spot_params
