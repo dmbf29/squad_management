@@ -8,7 +8,7 @@
           <small><%= player.positions %></small>
           <small>
             <%= link_to player_path(player, squad_id: squad.id), class: "tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
-              <i class="fa-solid fa-times text-light ms-2"></i>
+              <i class="fa-solid fa-trash text-light ms-2"></i>
             <% end %>
           </small>
         </div>
@@ -16,39 +16,7 @@
       </div>
       <div class="modal-body">
         <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag %>
-        <%= simple_form_for player, remote: true do |f| %>
-          <div class="row">
-            <div class="col">
-              <%= f.input :current_ability, input_html: { min: 0, max: 5, step: 0.5 } %>
-            </div>
-            <div class="col">
-              <%# Not using this one yet %>
-              <%#= f.input :potential_low, input_html: { min: 0, max: 5, step: 0.5 } %>
-              <%= f.input :potential_high, input_html: { min: 0, max: 5, step: 0.5 } %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <%= f.input :price_purchased, input_html: { min: 0 } %>
-            </div>
-            <div class="col">
-              <%= f.input :price_sold, input_html: { min: 0 } %>
-            </div>
-          </div>
-          <fieldset class="form-group radio_buttons required player_color">
-            <legend class="col-form-label pt-0">Text color</legend>
-            <div class="color-wrapper">
-              <input type="hidden" name="player[color_id]" value="">
-              <% Player::COLORS.each do |color| %>
-                <div class="color-item">
-                  <input class="form-check-input radio_buttons required color-selector" data-style="ruby" type="radio" value="<%= color %>" name="player[text_color]" id="player_color_id_<%= color.delete('#') %>-<%= player.id %>" <%= 'checked' if player.text_color == color %>>
-                  <label class="form-check-label collection_radio_buttons" for="player_color_id_<%= color.delete('#') %>-<%= player.id %>" style='background-color: <%= color %>'><%= color %></label>
-                </div>
-              <% end %>
-            </div>
-          </fieldset>
-          <%= f.submit class: 'btn btn-primary mt-2 w-100' %>
-        <% end %>
+        <%= render 'players/form', player: player %>
       </div>
     </div>
   </div>

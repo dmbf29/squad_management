@@ -1,7 +1,10 @@
 <div class="d-flex justify-content-start">
   <ul class="nav tabs-underlined" id="squad_tabs" role="tablist">
     <li class="nav-item tab-underlined d-flex align-items-start me-2" role="presentation" data-bs-toggle="modal" data-bs-target="#importModal">
-      <small><i class="fa-solid fa-user-plus me-1"></i> Import/Update</small>
+      <small><i class="fa-solid fa-file-import me-1"></i> Import/Update</small>
+    </li>
+    <li class="nav-item tab-underlined d-flex align-items-start me-2" role="presentation" data-bs-toggle="modal" data-bs-target="#manualModal">
+      <small><i class="fa-solid fa-user-plus me-1"></i> Manual Add</small>
     </li>
     <li class="nav-item d-flex align-items-start" role="presentation">
       <%= link_to empty_squad_path(squad), class: "tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove all players from squad? This is irreversible."} do %>
@@ -9,25 +12,5 @@
       <% end %>
     </li>
   </ul>
-  <!-- Modal -->
-  <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="importModalLabel">Import HTML</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <%= simple_form_for squad, url: import_squad_path(squad), method: :post do |f| %>
-            <div class="col-12">
-              <%= f.input :uploads, as: :file %>
-            </div>
-            <div class="col-12">
-              <%= f.submit "Import", class: "btn btn-primary" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'squads/actions_modals', squad: squad %>
 </div>
