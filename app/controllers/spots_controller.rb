@@ -2,6 +2,12 @@ class SpotsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:update_places, :update_all]
   skip_before_action :verify_authenticity_token, only: [:update_places, :update_all]
 
+  def create
+    @spot = Spot.new(spot_params)
+    @spot.save
+    redirect_to squad_path(@spot.squad)
+  end
+
   def update_places
     # Followed this: https://prabinpoudel.com.np/notes/update-multiple-records-at-once-in-rails/
     @spot = Spot.find(params[:id])
@@ -25,9 +31,22 @@ class SpotsController < ApplicationController
     redirect_to spot_path(@spot)
   end
 
+  def destroy
+    @spot = Spot.find(params[:id])
+    another_spot = @spot.squad.spots.where.not(id: @spot).sample
+    if params[:destroy_all] == 'false'
+      @spot.spot_places.each do |spot_place|
+        spot_place.spot = another_spot
+        spot_place.save
+      end
+    end
+    @spot.destroy
+    redirect_to squad_path(@spot.squad), status: :see_other
+  end
+
   private
 
   def spot_params
-    params.require(:spot).permit(:name, :row_number, :rank, :position_id)
+    params.require(:spot).permit(:name, :row_number, :rank, :position_id, :squad_id)
   end
 end

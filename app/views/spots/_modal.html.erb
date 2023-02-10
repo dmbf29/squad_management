@@ -1,17 +1,43 @@
 <!-- Modal -->
-<div class="modal fade" id="spotModal-<%= spot.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="spotModal-<%= spot.id ? spot.id : "row-#{row_number}" %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <div class="d-flex align-items-end">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Squad Place</h1>
+          <% if spot.id %>
+            <div id="accordionSpot">
+              <div class="accordion-item">
+                <small onClick='this.classList.add("invisible")'>
+                  <i class="fa-solid fa-trash text-light ms-2" data-bs-toggle="collapse" data-bs-target="#destroySpot-<%= spot.id %>" aria-expanded="true" aria-controls="destroySpot-<%= spot.id %>"></i>
+                </small>
+                <div id="destroySpot-<%= spot.id %>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSpot">
+                  <div class="accordion-body">
+                    <div class="d-flex">
+                      <%= link_to spot_path(spot, destroy_all: true), class: "btn btn-light mx-1", data: { turbo_method: :delete, turbo_confirm: "⚠️ Delete all rows from position? This is irreversible."}  do %>
+                        Delete Rows
+                      <% end %>
+                      <%= link_to spot_path(spot, destroy_all: false), class: "btn btn-primary", data: { turbo_method: :delete, turbo_confirm: "⚠️ Reassign all rows from position?"}  do %>
+                        Reassign Rows
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= simple_form_for spot do |f| %>
           <%= f.input :name %>
           <%# This is being updated by the drag and drop now  %>
-          <%#= f.input :row_number %>
           <%#= f.input :rank %>
+          <% unless spot.id %>
+            <%= f.input :row_number, as: :hidden, input_html: { value: row_number } %>
+            <%= f.association :squad, as: :hidden, input_html: { value: squad.id } %>
+          <% end %>
           <%= f.association :position, collection: Position.order(:name) %>
           <%= f.submit class: 'btn btn-primary mt-2' %>
         <% end %>
