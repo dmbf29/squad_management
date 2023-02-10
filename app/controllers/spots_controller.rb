@@ -4,8 +4,6 @@ class SpotsController < ApplicationController
 
   def create
     @spot = Spot.new(spot_params)
-    @squad = Squad.find(params[:squad_id])
-    @spot.squad = @squad
     @spot.save
     redirect_to squad_path(@spot.squad)
   end
@@ -36,6 +34,6 @@ class SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:name, :row_number, :rank, :position_id)
+    params.require(:spot).permit(:name, :row_number, :rank, :position_id, :squad_id)
   end
 end

@@ -32,6 +32,6 @@ class Spot < ApplicationRecord
   before_validation :check_rank
 
   def check_rank
-    self.rank = spot.spot_places.count + 1 if rank.nil?
+    self.rank = squad.spots.where(row_number: row_number).count + 1 if rank.nil?
   end
 end

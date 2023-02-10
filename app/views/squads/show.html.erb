@@ -7,7 +7,7 @@
         <%= render 'spots/card', spot: spot, row_number: row_number, squad: @squad %>
       <% end %>
       <div class='d-flex align-items-center'>
-        <i class="fa-solid fa-circle-plus opacity-25" data-bs-toggle="modal" data-bs-target="#spotModal-row-<%= row_number %>"></i>
+        <i class="fa-solid fa-circle-plus opacity-25 cursor-pointer" data-bs-toggle="modal" data-bs-target="#spotModal-row-<%= row_number %>"></i>
         <%= render 'spots/modal', spot: Spot.new, row_number: row_number, squad: @squad %>
       </div>
     </div>
