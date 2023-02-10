@@ -3,7 +3,30 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Squad Place</h1>
+        <div class="d-flex align-items-end">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Squad Place</h1>
+          <% if spot.id %>
+            <div id="accordionSpot">
+              <div class="accordion-item">
+                <small>
+                  <i class="fa-solid fa-trash text-light ms-2" data-bs-toggle="collapse" data-bs-target="#destroySpot-<%= spot.id %>" aria-expanded="true" aria-controls="destroySpot-<%= spot.id %>"></i>
+                </small>
+                <div id="destroySpot-<%= spot.id %>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSpot">
+                  <div class="accordion-body">
+                    <div class="d-flex">
+                      <%= link_to spot_path(spot, destroy_all: true), class: "tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Delete all rows from position? This is irreversible."}  do %>
+                        Delete Rows
+                      <% end %>
+                      <%= link_to spot_path(spot, destroy_all: false), class: "tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Delete all rows from position? This is irreversible."}  do %>
+                        Reassign Rows
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
