@@ -1,10 +1,20 @@
-<div class="container">
-  <h1>Teams</h1>
+<div class="container mt-3">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h1 class='m-0'>Teams</h1>
+    <div>
+      <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#teamModal"></i>
+      <%= render 'teams/modal', team: Team.new %>
+    </div>
+  </div>
   <% @teams.each do |team|  %>
     <p><%= team.name %></p>
     <ul>
-      <% team.squads.each do |squad| %>
-        <li><%= link_to squad.name, squad_path(squad) %></li>
+      <% if team.squads.any? %>
+        <% team.squads.each do |squad| %>
+          <li><%= link_to squad.name, squad_path(squad) %></li>
+        <% end %>
+      <% else %>
+        <%= link_to "Create a squad for #{team.name}", new_team_squad_path(team) %>
       <% end %>
     </ul>
   <% end %>

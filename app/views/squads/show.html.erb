@@ -6,6 +6,9 @@
       <% spots.sort_by(&:rank).each do |spot| %>
         <%= render 'spots/card', spot: spot %>
       <% end %>
+      <div class='d-flex align-items-center'>
+        <i class="fa-solid fa-circle-plus"></i>
+      </div>
     </div>
   <% end %>
 </div>

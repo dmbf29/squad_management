@@ -1,6 +1,12 @@
 class SquadsController < ApplicationController
   before_action :set_squad, only: [:show, :import, :empty]
 
+  def new
+  end
+
+  def create
+  end
+
   def show
     @spots = @squad.spots.group_by { |spot| spot.row_number }
     @tags = Tag.created_by_app_or_user(current_user)

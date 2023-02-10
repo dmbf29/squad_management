@@ -1,4 +1,4 @@
-<div class="card-spot mx-3 flex-same-size" data-id="<%= spot.id %>">
+<div class="card-spot mx-2 flex-same-size" data-id="<%= spot.id %>">
   <div class="d-flex justify-content-center py-2 text-primary border-bottom">
     <span class='fw-bold' data-bs-toggle="modal" data-bs-target="#spotModal-<%= spot.id %>"><i class="fa-solid fa-grip handle"></i> <%= spot.name %> <small class='text-light fw-light'>(<%= spot.spot_places.count %>)</small></span>
     <%= render 'spots/modal', spot: spot %>
