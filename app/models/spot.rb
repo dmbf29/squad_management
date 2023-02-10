@@ -29,4 +29,9 @@ class Spot < ApplicationRecord
   # validates :rank, presence: true, uniqueness: { scope: [:squad, :row_number] }
   validates :row_number, presence: true
   validates :name, presence: true
+  before_validation :check_rank
+
+  def check_rank
+    self.rank = spot.spot_places.count + 1 if rank.nil?
+  end
 end
