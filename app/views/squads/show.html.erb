@@ -4,11 +4,11 @@
   <% @spots.each do |row_number, spots| %>
     <div class="d-flex justify-content-evenly mb-5" data-controller="sortable-cards" data-row="<%= row_number %>">
       <% spots.sort_by(&:rank).each do |spot| %>
-        <%= render 'spots/card', spot: spot, row_number: row_number %>
+        <%= render 'spots/card', spot: spot, row_number: row_number, squad: @squad %>
       <% end %>
       <div class='d-flex align-items-center'>
-        <i class="fa-solid fa-circle-plus opacity-25"></i>
-        <%= render 'spots/modal', spot: Spot.new, row_number: row_number %>
+        <i class="fa-solid fa-circle-plus opacity-25" data-bs-toggle="modal" data-bs-target="#spotModal-row-<%= row_number %>"></i>
+        <%= render 'spots/modal', spot: Spot.new, row_number: row_number, squad: @squad %>
       </div>
     </div>
   <% end %>
