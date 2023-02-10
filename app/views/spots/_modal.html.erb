@@ -3,15 +3,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Squad Place</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= simple_form_for spot do |f| %>
           <%= f.input :name %>
           <%# This is being updated by the drag and drop now  %>
-          <%#= f.input :row_number %>
           <%#= f.input :rank %>
+          <% unless spot.id %>
+            <%= f.input :row_number, as: :hidden , input_html: { value: row_number } %>
+          <% end %>
           <%= f.association :position, collection: Position.order(:name) %>
           <%= f.submit class: 'btn btn-primary mt-2' %>
         <% end %>
