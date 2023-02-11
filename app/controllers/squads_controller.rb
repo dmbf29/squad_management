@@ -48,6 +48,6 @@ class SquadsController < ApplicationController
   end
 
   def squad_params
-    params.require(:squad).permit(:uploads, :name, :total_rows, :team_id, posts_attributes: [])
+    params.require(:squad).permit(:uploads, :name, :total_rows, :team_id, spots_attributes: [:name, :position_id, :row_number, :rank, :_destroy])
   end
 end
