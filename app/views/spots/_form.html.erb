@@ -1,0 +1,33 @@
+<div class="nested-form-wrapper" data-new-record="<%= f.object.new_record? %>">
+  <div class="row align-items-center">
+    <div class="col">
+      <%= f.input :name %>
+    </div>
+    <div class="col">
+      <%= f.association :position, collection: Position.order(:name) %>
+    </div>
+    <% unless spot.id %>
+      <%# This is being updated by the drag and drop now  %>
+      <div class="col">
+        <% if row_number %>
+          <%= f.input :row_number, as: :hidden, input_html: { value: row_number } %>
+        <% else %>
+          <%= f.input :row_number %>
+        <% end %>
+      </div>
+      <div class="col">
+        <%= f.input :rank, label: 'Order' %>
+      </div>
+      <div class="col">
+        <button type="button" data-action="nested-form#remove" class='btn mt-3  '><i class="fa-solid fa-xmark"></i></button>
+        <%= f.hidden_field :_destroy %>
+      </div>
+    <% end %>
+    <% if spot.id %>
+      <div class="col">
+        <%= f.association :squad, as: :hidden, input_html: { value: squad.id } %>
+      </div>
+      <%= f.submit class: 'btn btn-primary mt-2' %>
+    <% end %>
+  </div>
+</div>

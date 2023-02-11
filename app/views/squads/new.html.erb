@@ -4,15 +4,15 @@
     <%= simple_form_for [@team, @squad], data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
       <%= f.input :name %>
       <%= f.input :total_rows %>
-      <%= f.simple_fields_for :spots do |spots_form| %>
-        <%= spots_form.input :name %>
-        <%= spots_form.input :row_number %>
-        <%= spots_form.input :rank %>
-        <%= spots_form.association :position %>
-      <% end %>
+      <h3>Add Squad Spots</h3>
+      <template data-nested-form-target="template">
+        <%= f.simple_fields_for :spots do |spots_form| %>
+          <%= render 'spots/form', f: spots_form, spot: Spot.new, row_number: nil, squad: @squad %>
+        <% end %>
+      </template>
       <div data-nested-form-target="target"></div>
-      <button type="button" data-action="nested-form#add">Add todo</button>
-      <%= f.submit class: 'btn btn-primary mt-2' %>
+      <button type="button" data-action="nested-form#add" class="btn btn-light">Add Spot</button>
+      <%= f.submit class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>
