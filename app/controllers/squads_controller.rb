@@ -4,6 +4,7 @@ class SquadsController < ApplicationController
   def new
     @team = Team.find(params[:team_id])
     @squad = Squad.new
+    @squad.spots.build
   end
 
   def create

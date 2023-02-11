@@ -2,13 +2,16 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import SortableCardsController from "./sortable_cards_controller"
-application.register("sortable-cards", SortableCardsController)
+import SortableCardsController from "./sortable_cards_controller";
+application.register("sortable-cards", SortableCardsController);
 
-import SortableRowsController from "./sortable_rows_controller"
-application.register("sortable-rows", SortableRowsController)
+import SortableRowsController from "./sortable_rows_controller";
+application.register("sortable-rows", SortableRowsController);
 
-import TagFormController from "./tag_form_controller"
-application.register("tag-form", TagFormController)
+import TagFormController from "./tag_form_controller";
+application.register("tag-form", TagFormController);
+
+import NestedForm from "stimulus-rails-nested-form";
+application.register("nested-form", NestedForm);
