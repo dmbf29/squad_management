@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :teams, only: [:index, :create] do
-    resources :squads, only: [:new]
+    resources :squads, only: [:new, :create]
   end
   resources :squads, only: [:show] do
     member do
