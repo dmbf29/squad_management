@@ -2,9 +2,19 @@ class SquadsController < ApplicationController
   before_action :set_squad, only: [:show, :import, :empty]
 
   def new
+    @team = Team.find(params[:team_id])
+    @squad = Squad.new
   end
 
   def create
+    @team = Team.find(params[:team_id])
+    @squad = Squad.new(squad_params)
+    @squad.team = @team
+    if @squad.save
+      redirect_to squad_path(@squad)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -37,6 +47,6 @@ class SquadsController < ApplicationController
   end
 
   def squad_params
-    params.require(:squad).permit(:uploads)
+    params.require(:squad).permit(:uploads, :name, :total_rows, :team_id, posts_attributes: [])
   end
 end

@@ -25,6 +25,7 @@ class Squad < ApplicationRecord
   validates :name, presence: true
   validates :total_rows, presence: true, numericality: { greater_than: 0, only_integer: true }
   has_many_attached :uploads
+  accepts_nested_attributes_for :spots
 
   def add_player_in_spot(player)
     return if spots.empty? || player.nil?
