@@ -1,5 +1,5 @@
 <div class="container mt-3">
-  <%= render 'squads/header', squad: @squad %>
+  <%= render 'squads/header', squad: @squad, new_squad: @new_squad, team: @team %>
   <%= render 'squads/subheader', squad: @squad %>
   <% @spots.each do |row_number, spots| %>
     <div class="d-flex justify-content-evenly mb-5" data-controller="sortable-cards" data-row="<%= row_number %>">

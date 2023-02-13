@@ -23,6 +23,8 @@ class SquadsController < ApplicationController
     @spots = @squad.spots.group_by { |spot| spot.row_number }
     @tags = Tag.created_by_app_or_user(current_user)
     @player_tag = PlayerTag.new
+    @team = @squad.team
+    @new_squad = Squad.new
     @row_number = @spots.any? ? @spots.keys.last + 1 : 1
   end
 

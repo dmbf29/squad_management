@@ -9,9 +9,8 @@
       <% end %>
       <li>
         <span class="nav-link">
-          <%= link_to new_team_squad_path(squad.team), class: "tab-underlined" do %>
-            <i class="fa-regular fa-square-plus"></i>
-          <% end %>
+          <i class="fa-regular fa-square-plus opacity-25 cursor-pointer text-light" data-bs-toggle="modal" data-bs-target="#squadModal"></i>
+          <%= render 'squads/modal', squad: new_squad, team: team %>
         </span>
       </li>
     </ul>
