@@ -30,17 +30,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for spot do |f| %>
-          <%= f.input :name %>
-          <%# This is being updated by the drag and drop now  %>
-          <%#= f.input :rank %>
-          <% unless spot.id %>
-            <%= f.input :row_number, as: :hidden, input_html: { value: row_number } %>
-            <%= f.association :squad, as: :hidden, input_html: { value: squad.id } %>
-          <% end %>
-          <%= f.association :position, collection: Position.order(:name) %>
-          <%= f.submit class: 'btn btn-primary mt-2' %>
-        <% end %>
+        <%= render 'spots/form', spot: spot, row_number: row_number, squad: squad %>
       </div>
     </div>
   </div>

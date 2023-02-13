@@ -6,11 +6,23 @@
         <h1 class="modal-title fs-5" id="teamModalLabel">New Team</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <%= simple_form_for team do |f| %>
+      <div class="modal-body" data-controller='activate-button'>
+        <%= simple_form_for team, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
           <%= f.input :name %>
           <%= f.input :currency, input_html: { value: '£' } %>
-          <%= f.submit class: 'btn btn-primary' %>
+          <h5>Add Indv Squad Name / Formation</h5>
+          <%= f.simple_fields_for :squads do |squads_form| %>
+            <div class="d-flex align-items-center w-100">
+              <%= squads_form.input :name, placeholder: 'Senior', wrapper_html: { class: 'w-100' }, input_html: { data: { action: 'keyup->activate-button#toggle' } } %>
+              <%= squads_form.input :total_rows, as: :hidden, input_html: { value: 1 } %>
+            </div>
+          <% end %>
+          <template data-nested-form-target="template">
+            <%= render 'squads/fields_for', f: f, have_remove_btn: true %>
+          </template>
+          <div data-nested-form-target="target"></div>
+          <button type="button" data-action="nested-form#add" class="btn btn-light">Add Squad</button>
+          <%= f.submit class: 'btn btn-primary', data: { activate_button_target: 'button' }, disabled: true %>
         <% end %>
       </div>
     </div>

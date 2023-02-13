@@ -1,0 +1,27 @@
+<!-- Modal -->
+<div class="modal fade" id="squadModal-<%= squad.id %>" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex align-items-end">
+          <% if squad.id %>
+            <h1 class="modal-title fs-5" id="teamModalLabel">Edit <%= squad.name %></h1>
+          <% else %>
+            <h1 class="modal-title fs-5" id="teamModalLabel">New Squad</h1>
+          <% end %>
+          <% if squad.id %>
+            <small>
+              <%= link_to squad_path(squad), class: "opacity-25", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove squad (and players) from team? This is irreversible."}  do %>
+                <i class="fa-solid fa-trash text-light ms-2"></i>
+              <% end %>
+            </small>
+          <% end %>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" data-controller='activate-button'>
+        <%= render 'squads/form', team: team, squad: squad %>
+      </div>
+    </div>
+  </div>
+</div>

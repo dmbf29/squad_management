@@ -1,0 +1,19 @@
+<%# Currently not used  %>
+<div class="container mt-3">
+  <div class="row">
+    <h1>New Squad for <%= @team.name %></h1>
+    <%= simple_form_for [@team, @squad], data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
+      <%= f.input :name %>
+      <%= f.input :total_rows %>
+      <h3>Add Squad Spots</h3>
+      <template data-nested-form-target="template">
+        <%= f.simple_fields_for :spots, child_index: 'NEW_RECORD' do |spots_form| %>
+          <%= render 'spots/form', f: spots_form, spot: Spot.new, row_number: nil, squad: @squad %>
+        <% end %>
+      </template>
+      <div data-nested-form-target="target"></div>
+      <button type="button" data-action="nested-form#add" class="btn btn-light">Add Spot</button>
+      <%= f.submit class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

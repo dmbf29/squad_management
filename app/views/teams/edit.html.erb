@@ -1,0 +1,24 @@
+<div class="container mt-3">
+  <div class="d-flex align-items-center">
+    <h1 class="modal-title fs-5" id="teamModalLabel">Edit <%= @team.name %></h1>
+    <small>
+      <%= link_to team_path(@team), class: "opacity-25", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove team (and squads)? This is irreversible."}  do %>
+        <i class="fa-solid fa-trash text-light ms-2"></i>
+      <% end %>
+    </small>
+  </div>
+  <%= simple_form_for @team do |f| %>
+    <%= f.input :name %>
+    <%= f.input :currency, input_html: { value: '£' } %>
+    <!-- <h5>Individual Squad Names / Formations</h5>
+  <%# @team.squads.each_with_index do |squad, _index| %>
+    <%#= f.simple_fields_for squad, child_index: squad.id do |squads_form| %>
+      <div class="d-flex align-items-center w-100">
+        <%#= squads_form.input :id, as: :hidden %>
+        <%#= squads_form.input :name %>
+      </div>
+      <%# end %>
+      <%# end %> -->
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>

@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :teams, only: [:index, :create] do
-    resources :squads, only: [:new]
+  resources :teams, only: [:index, :create, :edit, :update, :destroy] do
+    resources :squads, only: [:new, :create, :update]
   end
-  resources :squads, only: [:show] do
+  resources :squads, only: [:show, :destroy] do
     member do
       post :import
       delete :empty

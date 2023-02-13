@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ActivateButtonController from "./activate_button_controller"
+application.register("activate-button", ActivateButtonController)
+
 import SortableCardsController from "./sortable_cards_controller"
 application.register("sortable-cards", SortableCardsController)
 

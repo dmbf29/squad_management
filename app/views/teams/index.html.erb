@@ -3,7 +3,7 @@
     <h1 class='m-0'>Teams</h1>
     <div>
       <i class="fa-solid fa-circle-plus cursor-pointer" data-bs-toggle="modal" data-bs-target="#teamModal"></i>
-      <%= render 'teams/modal', team: Team.new %>
+      <%= render 'teams/modal', team: @team %>
     </div>
   </div>
   <% @teams.each do |team|  %>
