@@ -11,7 +11,12 @@
           <%= f.input :name %>
           <%= f.input :currency, input_html: { value: '£' } %>
           <h5>Add Indv Squad Name / Formation</h5>
-          <%= render 'squads/fields_for', f: f, have_remove_btn: false %>
+          <%= f.simple_fields_for :squads do |squads_form| %>
+            <div class="d-flex align-items-center w-100">
+              <%= squads_form.input :name, placeholder: 'Senior', wrapper_html: { class: 'w-100' } %>
+              <%= squads_form.input :total_rows, as: :hidden, input_html: { value: 1 } %>
+            </div>
+          <% end %>
           <template data-nested-form-target="template">
             <%= render 'squads/fields_for', f: f, have_remove_btn: true %>
           </template>

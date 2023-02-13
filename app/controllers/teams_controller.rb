@@ -13,6 +13,7 @@ class TeamsController < ApplicationController
       flash[:alert] = 'Team and squad created.'
       redirect_to squad_path(@team.squads.first)
     else
+      raise
       flash[:alert] = 'Sorry something went wrong.'
       redirect_to teams_path
     end
