@@ -13,7 +13,7 @@
           <h5>Add Indv Squad Name / Formation</h5>
           <%= f.simple_fields_for :squads do |squads_form| %>
             <div class="d-flex align-items-center w-100">
-              <%= squads_form.input :name, placeholder: 'Senior', wrapper_html: { class: 'w-100' }, data: { activate_button_target: 'input' } %>
+              <%= squads_form.input :name, placeholder: 'Senior', wrapper_html: { class: 'w-100' }, input_html: { data: { action: 'keyup->activate-button#toggle' } } %>
               <%= squads_form.input :total_rows, as: :hidden, input_html: { value: 1 } %>
             </div>
           <% end %>
@@ -22,7 +22,7 @@
           </template>
           <div data-nested-form-target="target"></div>
           <button type="button" data-action="nested-form#add" class="btn btn-light">Add Squad</button>
-          <%= f.submit class: 'btn btn-primary', data: { activate_button_target: 'button' } %>
+          <%= f.submit class: 'btn btn-primary', data: { activate_button_target: 'button' }, disabled: true %>
         <% end %>
       </div>
     </div>
