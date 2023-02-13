@@ -1,0 +1,12 @@
+<%= f.simple_fields_for :squads, child_index: 'NEW_RECORD' do |squads_form| %>
+  <div class="nested-form-wrapper" data-new-record="<%= f.object.new_record? %>">
+    <div class="d-flex align-items-center w-100">
+      <%= squads_form.input :name, wrapper_html: { class: 'w-100' } %>
+      <%= squads_form.input :total_rows, as: :hidden, input_html: { value: 1 } %>
+      <% if have_remove_btn %>
+        <button type="button" data-action="nested-form#remove" class='btn mt-3  '><i class="fa-solid fa-xmark"></i></button>
+        <%= f.hidden_field :_destroy %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

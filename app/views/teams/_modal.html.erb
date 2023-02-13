@@ -7,9 +7,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for team do |f| %>
+        <%= simple_form_for team, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
           <%= f.input :name %>
           <%= f.input :currency, input_html: { value: '£' } %>
+          <h5>Add Indv Squad Name / Formation</h5>
+          <%= render 'squads/fields_for', f: f, have_remove_btn: false %>
+          <template data-nested-form-target="template">
+            <%= render 'squads/fields_for', f: f, have_remove_btn: true %>
+          </template>
+          <div data-nested-form-target="target"></div>
+          <button type="button" data-action="nested-form#add" class="btn btn-light">Add Squad</button>
           <%= f.submit class: 'btn btn-primary' %>
         <% end %>
       </div>

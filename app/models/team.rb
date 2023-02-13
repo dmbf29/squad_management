@@ -24,4 +24,5 @@ class Team < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :spots, through: :squads
   validates :name, presence: true
+  accepts_nested_attributes_for :squads, reject_if: :all_blank, allow_destroy: true
 end
