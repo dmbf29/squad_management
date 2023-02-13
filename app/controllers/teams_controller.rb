@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  before_action :set_team, only: [:edit, :update, :destroy]
+
   def index
     @teams = current_user.teams
     @squad = Squad.new
@@ -19,9 +21,29 @@ class TeamsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @team.update(team_params)
+      redirect_to teams_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @team.destroy
+    redirect_to teams_path
+  end
+
   private
 
   def team_params
     params.require(:team).permit(:name, :currency, :current_date, squads_attributes: [:name, :total_rows, :_destroy])
+  end
+
+  def set_team
+    @team = Team.find(params[:id])
   end
 end

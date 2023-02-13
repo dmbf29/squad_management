@@ -1,5 +1,5 @@
 class SquadsController < ApplicationController
-  before_action :set_squad, only: [:show, :import, :empty]
+  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy]
 
   def new
     # Currently not used
@@ -43,6 +43,16 @@ class SquadsController < ApplicationController
     # @squad.players.destroy_all
     Player.where(id: @squad.players).destroy_all
     redirect_to squad_path(@squad), status: :see_other
+  end
+
+  def update
+    @squad.update(squad_params)
+    redirect_to squad_path(@squad)
+  end
+
+  def destroy
+    @squad.destroy
+    redirect_to teams_path
   end
 
   private

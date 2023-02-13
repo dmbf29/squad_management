@@ -1,15 +1,23 @@
 <div class="d-flex justify-content-between align-items-center">
-  <h1><%= squad.team.name %></h1>
+  <div class="d-flex align-items-center">
+    <h1><%= squad.team.name %></h1>
+    <small class='ms-2 opacity-25 text-light'><%= link_to edit_team_path(@team) do %><i class="fa-solid fa-gear"></i><% end %></small>
+  </div>
   <div class="d-flex flex-column">
     <ul class="nav tabs-underlined justify-content-end" id="squad_tabs" role="tablist">
       <% squad.team.squads.each do |squad| %>
         <li class="nav-item" role="presentation">
-          <span class="nav-link"><%= link_to squad.name, squad_path(squad), class: "tab-underlined #{'active' if squad.id == params[:id].to_i }" %></span>
+          <% if squad.id == params[:id].to_i %>
+            <span class="nav-link tab-underlined active" data-bs-toggle="modal" data-bs-target="#squadModal-<%= squad.id %>"><%= squad.name %></span>
+            <%= render 'squads/modal', squad: squad, team: team %>
+          <% else %>
+            <span class="nav-link"><%= link_to squad.name, squad_path(squad), class: "tab-underlined" %></span>
+          <% end %>
         </li>
       <% end %>
       <li>
         <span class="nav-link">
-          <i class="fa-regular fa-square-plus opacity-25 cursor-pointer text-light" data-bs-toggle="modal" data-bs-target="#squadModal"></i>
+          <i class="fa-regular fa-square-plus opacity-25 cursor-pointer text-light" data-bs-toggle="modal" data-bs-target="#squadModal-<%= new_squad.name %>"></i>
           <%= render 'squads/modal', squad: new_squad, team: team %>
         </span>
       </li>
