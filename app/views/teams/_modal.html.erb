@@ -6,14 +6,14 @@
         <h1 class="modal-title fs-5" id="teamModalLabel">New Team</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" data-controller='activate-button'>
         <%= simple_form_for team, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
           <%= f.input :name %>
           <%= f.input :currency, input_html: { value: '£' } %>
           <h5>Add Indv Squad Name / Formation</h5>
           <%= f.simple_fields_for :squads do |squads_form| %>
             <div class="d-flex align-items-center w-100">
-              <%= squads_form.input :name, placeholder: 'Senior', wrapper_html: { class: 'w-100' } %>
+              <%= squads_form.input :name, placeholder: 'Senior', wrapper_html: { class: 'w-100' }, data: { activate_button_target: 'input' } %>
               <%= squads_form.input :total_rows, as: :hidden, input_html: { value: 1 } %>
             </div>
           <% end %>
@@ -22,7 +22,7 @@
           </template>
           <div data-nested-form-target="target"></div>
           <button type="button" data-action="nested-form#add" class="btn btn-light">Add Squad</button>
-          <%= f.submit class: 'btn btn-primary' %>
+          <%= f.submit class: 'btn btn-primary', data: { activate_button_target: 'button' } %>
         <% end %>
       </div>
     </div>

@@ -2,9 +2,10 @@ class SquadsController < ApplicationController
   before_action :set_squad, only: [:show, :import, :empty]
 
   def new
-    @team = Team.find(params[:team_id])
-    @squad = Squad.new
-    @squad.spots.build
+    # Currently not used
+    # @team = Team.find(params[:team_id])
+    # @squad = Squad.new
+    # @squad.spots.build
   end
 
   def create

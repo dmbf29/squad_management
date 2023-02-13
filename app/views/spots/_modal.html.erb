@@ -30,9 +30,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for spot do |f| %>
-          <%= render 'spots/form', f: f, spot: spot, row_number: row_number, squad: spot.squad %>
-        <% end %>
+        <%= render 'spots/form', spot: spot, row_number: row_number, squad: squad %>
       </div>
     </div>
   </div>
