@@ -2,7 +2,7 @@
   <%= render 'squads/header', squad: @squad, new_squad: @new_squad, team: @team %>
   <%= render 'squads/subheader', squad: @squad %>
   <% @spots.each do |row_number, spots| %>
-    <div class="d-flex justify-content-evenly mb-5" data-controller="sortable-cards" data-row="<%= row_number %>">
+    <div class="d-flex justify-content-evenly mb-3" data-controller="sortable-cards" data-row="<%= row_number %>">
       <% spots.sort_by(&:rank).each do |spot| %>
         <%= render 'spots/card', spot: spot, row_number: row_number, squad: @squad %>
       <% end %>
@@ -12,7 +12,7 @@
       </div>
     </div>
   <% end %>
-  <div class='d-flex align-items-center'>
+  <div class='d-flex justify-content-center align-items-center mb-5'>
     <i class="fa-solid fa-circle-plus opacity-25 cursor-pointer" data-bs-toggle="modal" data-bs-target="#spotModal-row-<%= @row_number %>"></i>
     <%= render 'spots/modal', spot: Spot.new, row_number: @row_number, squad: @squad %>
   </div>
