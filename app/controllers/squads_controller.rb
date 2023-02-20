@@ -20,7 +20,7 @@ class SquadsController < ApplicationController
   end
 
   def show
-    @spots = @squad.spots.group_by { |spot| spot.row_number }
+    @spots = @squad.spots.group_by { |spot| spot.row_number }.sort.to_h
     @tags = Tag.created_by_app_or_user(current_user)
     @player_tag = PlayerTag.new
     @team = @squad.team
