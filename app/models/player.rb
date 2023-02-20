@@ -112,4 +112,8 @@ class Player < ApplicationRecord
     player_info[:position] = find_position(player_info[:position])
     player_info
   end
+
+  def other_team_squads(squad)
+    team.squads.where.not(id: squad)
+  end
 end
