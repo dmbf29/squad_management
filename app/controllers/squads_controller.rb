@@ -21,6 +21,7 @@ class SquadsController < ApplicationController
 
   def show
     @spots = @squad.spots.group_by { |spot| spot.row_number }.sort.to_h
+    # @spots = @squad.spots.group(:row_number) #.sort.to_h
     @tags = Tag.created_by_app_or_user(current_user)
     @player_tag = PlayerTag.new
     @team = @squad.team
@@ -58,7 +59,7 @@ class SquadsController < ApplicationController
   private
 
   def set_squad
-    @squad = Squad.find(params[:id])
+    @squad = Squad.includes([:spots]).find(params[:id])
   end
 
   def squad_params

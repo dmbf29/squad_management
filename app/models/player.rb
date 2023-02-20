@@ -114,6 +114,6 @@ class Player < ApplicationRecord
   end
 
   def other_team_squads(squad)
-    team.squads.where.not(id: squad)
+    team.squads.where.not(id: squad).includes([:spots])
   end
 end
