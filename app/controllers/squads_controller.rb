@@ -1,5 +1,5 @@
 class SquadsController < ApplicationController
-  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy]
+  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy, :import_results]
 
   def new
     # Currently not used
@@ -29,13 +29,19 @@ class SquadsController < ApplicationController
     @row_number = @spots.any? ? @spots.keys.last + 1 : 1
   end
 
+  def import_results
+    @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
+    @missing_players = @squad.players - @html_players
+    render :import
+  end
+
   def import
     @squad.update(squad_params)
     if @squad.uploads.attached?
       flash[:notice] = "Players imported from HTML"
       @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
       @missing_players = @squad.players - @html_players
-      # return players from html
+      # √ return players from html
       # show which spot they'll be placed in
       # allow to choose stars there?
       # show players in squad that weren't in the html

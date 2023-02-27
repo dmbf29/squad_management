@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
   resources :squads, only: [:show, :destroy] do
     member do
-      # get :import_results
+      get :import, to: 'squads#import_results'
       post :import
       delete :empty
     end
