@@ -1,5 +1,5 @@
 class SquadsController < ApplicationController
-  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy]
+  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy, :import_results]
 
   def new
     # Currently not used
@@ -21,6 +21,7 @@ class SquadsController < ApplicationController
 
   def show
     @spots = @squad.spots.group_by { |spot| spot.row_number }.sort.to_h
+    # @spots = @squad.spots.group(:row_number) #.sort.to_h
     @tags = Tag.created_by_app_or_user(current_user)
     @player_tag = PlayerTag.new
     @team = @squad.team
@@ -28,15 +29,41 @@ class SquadsController < ApplicationController
     @row_number = @spots.any? ? @spots.keys.last + 1 : 1
   end
 
+  def import_results
+    @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
+    @html_spot_places = @squad.spot_places.where(player: @html_players)
+    @spot_places_new = @html_spot_places.unchanged
+    @spot_places_old = @html_spot_places.changed
+    @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
+    @spots = @squad.spots
+    @tags = Tag.created_by_app_or_user(current_user)
+    @player_tag = PlayerTag.new
+    render :import
+  end
+
   def import
     @squad.update(squad_params)
     if @squad.uploads.attached?
-      ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
       flash[:notice] = "Players imported from HTML"
+      @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
+      @missing_players = @squad.players - @html_players
+      @spot_places_new = @html_spot_places.unchanged
+      @spot_places_old = @html_spot_places.changed
+      @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
+      @spots = @squad.spots
+      @tags = Tag.created_by_app_or_user(current_user)
+      @player_tag = PlayerTag.new
+      # √ return players from html
+      # √ show which spot they'll be placed in
+      # allow to choose stars there? (hard)
+      # show players in squad that weren't in the html
+      # show players in team but on another squad
+      # players on loan / players no longer on loan
+      render :import, status: :created
     else
       flash[:alert] = "Sorry something went wrong"
+      redirect_to squad_path(@squad)
     end
-    redirect_to squad_path(@squad)
   end
 
   def empty
@@ -58,7 +85,8 @@ class SquadsController < ApplicationController
   private
 
   def set_squad
-    @squad = Squad.find(params[:id])
+    # @squad = Squad.includes([:spots]).find(params[:id])
+    @squad = Squad.includes(spots: { spot_places: :player }, players: :tags).find(params[:id])
   end
 
   def squad_params

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   resources :squads, only: [:show, :destroy] do
     member do
+      get :import, to: 'squads#import_results'
       post :import
       delete :empty
     end
@@ -23,4 +24,9 @@ Rails.application.routes.draw do
     resources :player_tags, only: [:create]
   end
   resources :player_tags, only: [:destroy]
+  resources :spot_places, only: [:update] do
+    member do
+      patch :import
+    end
+  end
 end

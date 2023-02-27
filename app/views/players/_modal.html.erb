@@ -1,3 +1,4 @@
+<!-- Vars: :player, :tags, :player_tag, :squad -->
 <!-- Modal -->
 <div class="modal fade" id="playerModal-<%= player.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -17,6 +18,7 @@
       <div class="modal-body">
         <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag %>
         <%= render 'players/form', player: player %>
+        <%= render 'players/move', player: player, squad: squad, spot_place: spot_place %>
       </div>
     </div>
   </div>

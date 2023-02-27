@@ -1,0 +1,27 @@
+<%# vars: player: player, squad: squad, spot_place: spot_place  %>
+<div class="accordion mt-2" id="accordion-player-<%= player.id %>">
+  <div class="accordion-item">
+    <h5 class="accordion-header" id="headingOne-<%= player.id%>">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#playerCollapse-<%= player.id %>" aria-expanded="true" aria-controls="playerCollapse-<%= player.id %>">
+        <h5 class='mb-0'>Move player</h5>
+      </button>
+    </h5>
+    <div id="playerCollapse-<%= player.id %>" class="accordion-collapse collapse" aria-labelledby="headingOne-<%= player.id%>" data-bs-parent="#accordion-player-<%= player.id %>">
+      <div class="accordion-body mt-0">
+        <% player.other_team_squads(squad).each do |sqd| %>
+          <h6 class='mb-0 mt-2'><%= sqd.name %></h6>
+          <div class="d-flex w-100 flex-wrap">
+            <% sqd.spots.each do |spt| %>
+              <%= simple_form_for spot_place do |f| %>
+                <%= f.input :spot_id, as: :hidden, input_html: { value: spt.id} %>
+                <%= f.button :button, class: 'btn btn-light mx-1' do %>
+                  <%= spt.name %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

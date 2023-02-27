@@ -1,0 +1,1 @@
+<%= turbo_stream.replace "update_player_#{@spot_place.player.id}", partial:'players/imported', locals: { player: @spot_place.player, spot_place: @spot_place, spots: @spots } %>

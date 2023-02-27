@@ -13,5 +13,8 @@ application.register("sortable-cards", SortableCardsController)
 import SortableRowsController from "./sortable_rows_controller"
 application.register("sortable-rows", SortableRowsController)
 
+import SubmitFormController from "./submit_form_controller"
+application.register("submit-form", SubmitFormController)
+
 import TagFormController from "./tag_form_controller"
 application.register("tag-form", TagFormController)
