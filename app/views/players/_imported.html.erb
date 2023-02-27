@@ -21,5 +21,8 @@
         <%= f.button :submit, as: :hidden, class: 'd-none', data: { submit_form_target: 'btn' } %>
       <% end %>
     </div>
+    <div class="col-12 col-sm-6">
+      <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag %>
+    </div>
   </div>
 <% end %>

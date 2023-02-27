@@ -36,6 +36,8 @@ class SquadsController < ApplicationController
     @spot_places_old = @html_spot_places.changed
     @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
     @spots = @squad.spots
+    @tags = Tag.created_by_app_or_user(current_user)
+    @player_tag = PlayerTag.new
     render :import
   end
 
