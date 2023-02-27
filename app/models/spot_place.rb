@@ -24,6 +24,8 @@ class SpotPlace < ApplicationRecord
   belongs_to :player
   # validates :rank, presence: true, uniqueness: { scope: :spot }
   before_validation :check_rank
+  scope :unchanged, -> { where('spot_places.updated_at = spot_places.created_at') }
+  scope :changed, -> { where('spot_places.updated_at > spot_places.created_at') }
 
   def check_rank
     self.rank = spot.spot_places.count + 1 if rank.nil?

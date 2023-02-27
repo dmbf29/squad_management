@@ -1,6 +1,10 @@
 <div class="container">
-  <h1>Imported Players</h1>
-  <% @html_spot_places.each do |spot_place| %>
+  <h3>New Players</h3>
+  <% @spot_places_new.each do |spot_place| %>
+    <%= render 'players/imported', player: spot_place.player, spot_place: spot_place, spots: @spots %>
+  <% end %>
+  <h3>Existing Players</h3>
+  <% @spot_places_old.each do |spot_place| %>
     <%= render 'players/imported', player: spot_place.player, spot_place: spot_place, spots: @spots %>
   <% end %>
   <h3>Players in Squad but not in Imported</h3>
