@@ -1,13 +1,12 @@
 <%= turbo_frame_tag dom_id(player, "remove") do %>
-  <div class="d-flex align-items-center justify-content-between spot-place-row my-1">
-    <div class="d-flex align-items-center">
-      <i class="fa-solid fa-grip me-2 handle"></i>
-      <div class="d-flex">
-        <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
-        <%= link_to player_path(player, squad_id: squad.id, remote: true), class: "ms-3 tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
-          <small><i class="fa-solid fa-trash text-light ms-2"></i></small>
-        <% end %>
-      </div>
+  <div class="row align-items-center spot-place-row my-1">
+    <div class="col-12 col-sm-2">
+      <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
+    </div>
+    <div class="col-12 col-sm-2">
+      <%= link_to player_path(player, squad_id: squad.id, remote: true), class: "ms-3 tab-underlined", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
+        <small><i class="fa-solid fa-trash text-light ms-2"></i></small>
+      <% end %>
     </div>
   </div>
 <% end %>

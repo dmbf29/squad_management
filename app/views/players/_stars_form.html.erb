@@ -1,0 +1,9 @@
+<%= simple_form_for player, remote: true, html: { data: { controller: 'submit-form' } } do |f| %>
+  <%#= f.association :spot, collection: spots, label: false, input_html: { class: 'ms-2', data: { action: 'change->submit-form#submit' } }, required: false %>
+  <%#= f.button :submit, as: :hidden, class: 'd-none', data: { submit_form_target: 'btn' } %>
+  <div class="star-rating">
+    <% Player::RATINGS.each do |rating| %>
+      <input type="radio" name="player[current_ability]" value="<%= rating %>" <%= "checked" if rating == player.current_ability %> class='<%= "fa-flip-horizontal" if rating == rating.truncate  %>' />
+    <% end %>
+  </div>
+<% end %>

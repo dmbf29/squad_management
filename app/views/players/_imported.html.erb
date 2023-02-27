@@ -1,15 +1,13 @@
 <%= turbo_frame_tag dom_id(player, "update") do %>
   <div class="row align-items-center spot-place-row my-1">
-    <div class="col-12 col-sm-2">
+    <div class="col-12 col-sm-3">
       <div class="d-flex align-items-center">
-        <i class="fa-solid fa-grip me-2 handle"></i>
         <div class="d-flex flex-column">
           <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
           <div class="d-flex text-small align-items-center fw-light">
             <div class="position-relative">
               <div class="text-transparent">stars</div>
-              <%= render 'players/stars', number: player.potential_high, special: true %>
-              <%= render 'players/stars', number: player.current_ability, special: false %>
+              <%#= render 'players/stars_form', player: player %>
             </div>
           </div>
         </div>

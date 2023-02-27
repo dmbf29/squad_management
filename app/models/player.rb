@@ -51,6 +51,7 @@ class Player < ApplicationRecord
   has_many :player_tags, dependent: :destroy
   has_many :tags, through: :player_tags
   validates :name, presence: true
+  RATINGS = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
   COLORS = ["#DAD2D8", "#EA526F", "#279AF1", '#F4D58D', '#FA7E61', '#03C7B4']
   ON_LOAN_COLOR = '#7052b4'
   UPDATEABLE_HTML_ATTRIBUTES = [

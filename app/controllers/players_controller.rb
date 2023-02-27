@@ -16,6 +16,10 @@ class PlayersController < ApplicationController
   def update
     @player = Player.find(params[:id])
     @player.update(player_params)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def destroy
