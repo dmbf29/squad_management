@@ -4,8 +4,9 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["btn"];
 
-  connect() {
-    console.log(this.element);
-    console.log(this.btnTarget);
+  connect() {}
+
+  submit() {
+    this.btnTarget.click();
   }
 }
