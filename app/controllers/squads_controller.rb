@@ -31,7 +31,9 @@ class SquadsController < ApplicationController
 
   def import_results
     @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
-    @missing_players = @squad.players - @html_players
+    @html_spot_places = @squad.spot_places.where(player: @html_players)
+    @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
+    @spots = @squad.spots
     render :import
   end
 

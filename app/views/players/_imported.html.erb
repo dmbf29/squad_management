@@ -1,18 +1,25 @@
-<div class="d-flex align-items-center justify-content-between spot-place-row my-1">
-  <div class="d-flex align-items-center">
-    <i class="fa-solid fa-grip me-2 handle"></i>
-    <div class="d-flex flex-column">
-      <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
-      <div class="d-flex text-small align-items-center fw-light">
-        <div class="d-flex me-1">
-          <%= player.age %>
+<%= turbo_frame_tag dom_id(player, "update") do %>
+  <div class="d-flex align-items-center justify-content-between spot-place-row my-1">
+    <div class="d-flex align-items-center">
+      <i class="fa-solid fa-grip me-2 handle"></i>
+      <div class="d-flex align-items-center">
+        <div class="d-flex flex-column">
+          <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
+          <div class="d-flex text-small align-items-center fw-light">
+            <div class="position-relative">
+              <div class="text-transparent">stars</div>
+              <%= render 'players/stars', number: player.potential_high, special: true %>
+              <%= render 'players/stars', number: player.current_ability, special: false %>
+            </div>
+          </div>
         </div>
-        <div class="position-relative">
-          <div class="text-transparent">stars</div>
-          <%= render 'players/stars', number: player.potential_high, special: true %>
-          <%= render 'players/stars', number: player.current_ability, special: false %>
+        <div>
+          <%= simple_form_for spot_place, url: import_spot_place_path(spot_place), remote: true, html: { data: { controller: 'submit-form' } } do |f| %>
+            <%= f.association :spot, collection: spots, label: false, input_html: { class: 'ms-2', data: { action: 'change->submit-form#submit' } }, required: false %>
+            <%= f.button :submit, as: :hidden, class: 'd-none', data: { submit_form_target: 'btn' } %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
