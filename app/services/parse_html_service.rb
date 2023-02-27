@@ -8,7 +8,7 @@ class ParseHtmlService
     @url = attrs[:url]
     @squad = attrs[:squad]
     @players = @squad.players
-    # @html_players = []
+    @html_players = []
   end
 
   def call
@@ -20,6 +20,7 @@ class ParseHtmlService
     doc.search('table tr')[1..-1].each do |row|
       create_or_update_player(row)
     end
+    @html_players
   end
 
   def create_or_update_player(row)
@@ -35,6 +36,7 @@ class ParseHtmlService
     if player
       # TODO: should only update specific attributes
       player.update(player_info)
+      @html_players << player
     else
       player = Player.create(player_info)
       squad.add_player_in_spot(player)

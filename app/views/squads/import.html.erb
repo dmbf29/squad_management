@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>Imported Players</h1>
+  <% @html_players.each do |player| %>
+    <%= render 'players/imported', player: player %>
+  <% end %>
+  <h3>Players in Squad but not in Imported</h3>
+  <% @missing_players.each do |player| %>
+    <%= render 'players/missing', player: player, squad: @squad %>
+  <% end %>
+</div>

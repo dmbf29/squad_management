@@ -9,6 +9,6 @@ class SpotPlacesController < ApplicationController
   private
 
   def spot_place_params
-    params.require(:spot_place).permit(:squad_id)
+    params.require(:spot_place).permit(:spot_id)
   end
 end

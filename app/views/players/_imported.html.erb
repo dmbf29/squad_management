@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center justify-content-between spot-place-row my-1">
+  <div class="d-flex align-items-center">
+    <i class="fa-solid fa-grip me-2 handle"></i>
+    <div class="d-flex flex-column">
+      <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
+      <div class="d-flex text-small align-items-center fw-light">
+        <div class="d-flex me-1">
+          <%= player.age %>
+        </div>
+        <div class="position-relative">
+          <div class="text-transparent">stars</div>
+          <%= render 'players/stars', number: player.potential_high, special: true %>
+          <%= render 'players/stars', number: player.current_ability, special: false %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

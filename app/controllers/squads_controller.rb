@@ -32,12 +32,20 @@ class SquadsController < ApplicationController
   def import
     @squad.update(squad_params)
     if @squad.uploads.attached?
-      ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
       flash[:notice] = "Players imported from HTML"
+      @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
+      @missing_players = @squad.players - @html_players
+      # return players from html
+      # show which spot they'll be placed in
+      # allow to choose stars there?
+      # show players in squad that weren't in the html
+      # show players in team but on another squad
+      # players on loan / players no longer on loan
+      render :import, status: :created
     else
       flash[:alert] = "Sorry something went wrong"
+      redirect_to squad_path(@squad)
     end
-    redirect_to squad_path(@squad)
   end
 
   def empty
@@ -59,7 +67,8 @@ class SquadsController < ApplicationController
   private
 
   def set_squad
-    @squad = Squad.includes([:spots]).find(params[:id])
+    # @squad = Squad.includes([:spots]).find(params[:id])
+    @squad = Squad.includes(spots: { spot_places: :player }, players: :tags).find(params[:id])
   end
 
   def squad_params
