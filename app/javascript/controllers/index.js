@@ -21,3 +21,6 @@ application.register("tag-form", TagFormController);
 
 import Autosave from "stimulus-rails-autosave";
 application.register("autosave", Autosave);
+
+import ColorPicker from "stimulus-color-picker";
+application.register("color-picker", ColorPicker);

@@ -7,6 +7,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "sortablejs": "^1.15.0",
+    "stimulus-color-picker": "^1.1.0",
     "stimulus-rails-autosave": "^4.1.1",
     "stimulus-rails-nested-form": "^4.1.0",
     "webpack": "^5.75.0",
