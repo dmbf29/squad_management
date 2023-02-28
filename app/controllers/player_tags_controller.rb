@@ -9,7 +9,7 @@ class PlayerTagsController < ApplicationController
     @player_tag.save
     respond_to do |format|
       format.html
-      format.json { render partial: "player_tags/destroy", locals: { player_tag: @player_tag, tag: @player_tag.tag }, formats: [:html] }
+      format.json { render partial: "player_tags/destroy", locals: { player_tag: @player_tag, tag: @player_tag.tag, show_desc: false }, formats: [:html] }
     end
   end
 
@@ -19,7 +19,7 @@ class PlayerTagsController < ApplicationController
     # render_to_string(partial: "player_tags/form", locals: { player: @player_tag.player, player_tag: PlayerTag.new, tag: @player_tag.tag }, formats: [:html] )
     respond_to do |format|
       format.html
-      format.json { render partial: "player_tags/form", locals: { player: @player_tag.player, player_tag: PlayerTag.new, tag: @player_tag.tag }, formats: [:html] }
+      format.json { render partial: "player_tags/form", locals: { player: @player_tag.player, player_tag: PlayerTag.new, tag: @player_tag.tag, show_desc: false }, formats: [:html] }
     end
   end
 

@@ -1,26 +1,32 @@
 <%= turbo_frame_tag dom_id(player, "update") do %>
-  <div class="row align-items-center spot-place-row my-1">
-    <div class="col-12 col-sm-3">
+  <div class="row align-items-center spot-place-row">
+    <div class="col-12 col-sm-2">
       <div class="d-flex align-items-center">
         <div class="d-flex flex-column">
           <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
+          <!--
           <div class="d-flex text-small align-items-center fw-light">
             <div class="position-relative">
               <div class="text-transparent">stars</div>
               <%#= render 'players/stars_form', player: player %>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
     <div class="col-12 col-sm-2">
       <%= simple_form_for spot_place, url: import_spot_place_path(spot_place), remote: true, html: { data: { controller: 'submit-form' } } do |f| %>
-        <%= f.association :spot, collection: spots, label: false, input_html: { class: 'ms-2', data: { action: 'change->submit-form#submit' } }, required: false %>
+        <%= f.association :spot, collection: spots, label: false, input_html: { class: 'ms-2', data: { action: 'change->submit-form#submit' } }, wrapper_html: { class: 'mb-1' }, required: false %>
         <%= f.button :submit, as: :hidden, class: 'd-none', data: { submit_form_target: 'btn' } %>
       <% end %>
     </div>
     <div class="col-12 col-sm-6">
-      <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag %>
+      <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag, show_desc: false %>
+    </div>
+    <div class="col-12 col-sm-1">
+      <%= link_to player_path(player, squad_id: spot_place.spot.squad.id, remote: true), class: "ms-3 tab-underlined text-danger", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
+        <small><i class="fa-regular fa-circle-xmark"></i></small>
+      <% end %>
     </div>
   </div>
 <% end %>

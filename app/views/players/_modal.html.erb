@@ -16,7 +16,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag %>
+        <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag, show_desc: true %>
         <%= render 'players/form', player: player %>
         <%= render 'players/move', player: player, squad: squad, spot_place: spot_place %>
       </div>

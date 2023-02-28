@@ -1,10 +1,10 @@
 <div class="d-flex align-items-center justify-content-evenly my-1">
   <% player.player_tags.each do |player_tag| %>
-    <%= render 'player_tags/destroy', player_tag: player_tag, tag: player_tag.tag %>
+    <%= render 'player_tags/destroy', player_tag: player_tag, tag: player_tag.tag, show_desc: show_desc %>
   <% end %>
   <% tags.where.not(id: player.tags).each do |tag| %>
     <div id="player-<%= player.id %>-tag-<%= tag.id %>">
-      <%= render 'player_tags/form', player: player, player_tag: player_tag, tag: tag %>
+      <%= render 'player_tags/form', player: player, player_tag: player_tag, tag: tag, show_desc: show_desc %>
     </div>
   <% end %>
 </div>

@@ -9,7 +9,9 @@
           <%= tag.abbrev %>
         <% end %>
       </label>
-      <legend class="col-form-label pt-0"><small><%= tag.name %></small></legend>
+      <% if show_desc %>
+        <legend class="col-form-label pt-0"><small><%= tag.name %></small></legend>
+      <% end %>
     </div>
   </fieldset>
 <% end %>

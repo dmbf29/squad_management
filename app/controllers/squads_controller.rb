@@ -46,7 +46,7 @@ class SquadsController < ApplicationController
     if @squad.uploads.attached?
       flash[:notice] = "Players imported from HTML"
       @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
-      @missing_players = @squad.players - @html_players
+      @html_spot_places = @squad.spot_places.where(player: @html_players)
       @spot_places_new = @html_spot_places.unchanged
       @spot_places_old = @html_spot_places.changed
       @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
