@@ -15,6 +15,9 @@
             <%= f.submit "Import", class: "btn btn-primary" %>
           </div>
         <% end %>
+        <div class="d-flex justify-content-center">
+          <%= link_to 'See last import', import_squad_path(squad), class: 'text-light'  %>
+        </div>
       </div>
     </div>
   </div>
