@@ -94,6 +94,7 @@ class Player < ApplicationRecord
       when "Rec" then :recommendation
       when "Media Description" then :media_desc
       when "Agreed Playing Time" then :playing_time
+      when "Last Transfer Fee" then :price_purchased
       end
     end
   end
@@ -103,6 +104,7 @@ class Player < ApplicationRecord
     # changing "£2.5M - £5.4M" or "£5.4K" to an integer
     player_info[:transfer_value] = format_price(player_info[:transfer_value])
     player_info[:release_clause] = format_price(player_info[:release_clause])
+    player_info[:price_purchased] = format_price(player_info[:price_purchased])
     # changing "Trained in nation (15-21)" to a boolean
     player_info[:home_grown_nation] = trained_in_nation(player_info[:home_grown_club])
     player_info[:home_grown_date] = trained_at_date(player_info[:home_grown_date])
