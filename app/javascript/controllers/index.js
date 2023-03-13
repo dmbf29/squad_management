@@ -2,25 +2,22 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import ActivateButtonController from "./activate_button_controller";
-application.register("activate-button", ActivateButtonController);
+import ActivateButtonController from "./activate_button_controller"
+application.register("activate-button", ActivateButtonController)
 
-import SortableCardsController from "./sortable_cards_controller";
-application.register("sortable-cards", SortableCardsController);
+import GroupSubmitController from "./group_submit_controller"
+application.register("group-submit", GroupSubmitController)
 
-import SortableRowsController from "./sortable_rows_controller";
-application.register("sortable-rows", SortableRowsController);
+import SortableCardsController from "./sortable_cards_controller"
+application.register("sortable-cards", SortableCardsController)
 
-import SubmitFormController from "./submit_form_controller";
-application.register("submit-form", SubmitFormController);
+import SortableRowsController from "./sortable_rows_controller"
+application.register("sortable-rows", SortableRowsController)
 
-import TagFormController from "./tag_form_controller";
-application.register("tag-form", TagFormController);
+import SubmitFormController from "./submit_form_controller"
+application.register("submit-form", SubmitFormController)
 
-import Autosave from "stimulus-rails-autosave";
-application.register("autosave", Autosave);
-
-import ColorPicker from "stimulus-color-picker";
-application.register("color-picker", ColorPicker);
+import TagFormController from "./tag_form_controller"
+application.register("tag-form", TagFormController)
