@@ -84,9 +84,9 @@ class SquadsController < ApplicationController
     # Players that need squad place
     @unconfirmed_players = @squad.team.players.where.missing(:spot_places)
     # Players previously imported and also being imported
-    @imported_spot_places = @squad.spot_places.where(player: @html_players)
+    @imported_spot_places = @squad.spot_places.where(player: @imported_players)
     # Players previously imported but missing from currently import
-    @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
+    @missing_spot_places = @squad.spot_places.where.not(player: @imported_players)
     # To add players not confirmed
     @spot_place = SpotPlace.new
 
