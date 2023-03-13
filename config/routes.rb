@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :player_tags, only: [:create]
   end
   resources :player_tags, only: [:destroy]
-  resources :spot_places, only: [:update] do
+  resources :spot_places, only: [:create, :update] do
     member do
       patch :import
     end

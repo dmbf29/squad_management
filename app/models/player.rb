@@ -118,4 +118,8 @@ class Player < ApplicationRecord
   def other_team_squads(squad)
     team.squads.where.not(id: squad).includes([:spots])
   end
+
+  def recommended_spot(spots)
+    spots.find_by(position: position) || spots.sample
+  end
 end

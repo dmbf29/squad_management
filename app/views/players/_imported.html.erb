@@ -15,16 +15,20 @@
       </div>
     </div>
     <div class="col-12 col-sm-2">
-      <%= simple_form_for spot_place, url: import_spot_place_path(spot_place), remote: true, html: { data: { controller: 'submit-form' } } do |f| %>
-        <%= f.association :spot, collection: spots, label: false, input_html: { class: 'ms-2', data: { action: 'change->submit-form#submit' } }, wrapper_html: { class: 'mb-1' }, required: false %>
-        <%= f.button :submit, as: :hidden, class: 'd-none', data: { submit_form_target: 'btn' } %>
+      <% url = spot_place.id ? import_spot_place_path(spot_place) : spot_places_path %>
+      <%= simple_form_for spot_place, url: url, remote: true, html: { data: { controller: 'submit-form' } } do |f| %>
+        <%= f.association :player, as: :hidden, input_html: { value: player.id } %>
+        <div class="d-flex">
+          <%= f.association :spot, collection: spots, selected: player.recommended_spot(spots).id, label: false, input_html: { class: 'ms-2', data: { action: 'change->submit-form#submit' } }, wrapper_html: { class: '' }, required: false %>
+          <%= f.submit '✔️', class: "btn btn-success #{ 'd-none' if spot_place.id }", data: { submit_form_target: 'btn' } %>
+        </div>
       <% end %>
     </div>
     <div class="col-12 col-sm-6">
       <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag, show_desc: false %>
     </div>
     <div class="col-12 col-sm-1">
-      <%= link_to player_path(player, squad_id: spot_place.spot.squad.id, remote: true), class: "ms-3 tab-underlined text-danger", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
+      <%= link_to player_path(player, squad_id: squad.id, remote: true), class: "ms-3 tab-underlined text-danger", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
         <small><i class="fa-regular fa-circle-xmark"></i></small>
       <% end %>
     </div>
