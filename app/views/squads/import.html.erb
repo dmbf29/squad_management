@@ -1,15 +1,18 @@
 <div class="container my-3">
-  <ul class="nav tabs-underlined" id="myTab" role="tablist">
-    <li class="nav-item me-3" role="presentation">
-      <span class="nav-link tab-underlined active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new-tab-pane" role="tab" aria-controls="new-tab-pane" aria-selected="true">New Players (<%= @unconfirmed_players.count %>)</span>
-    </li>
-    <li class="nav-item me-3" role="presentation">
-      <span class="nav-link tab-underlined" id="already-tab" data-bs-toggle="tab" data-bs-target="#already-tab-pane" role="tab" aria-controls="already-tab-pane" aria-selected="false">Existing Players (<%= @imported_spot_places.count %>)</span>
-    </li>
-    <li class="nav-item me-3" role="presentation">
-      <span class="nav-link tab-underlined" id="missing-tab" data-bs-toggle="tab" data-bs-target="#missing-tab-pane" role="tab" aria-controls="missing-tab-pane" aria-selected="false">Missing from Import (<%= @missing_spot_places.count %>)</span>
-    </li>
-  </ul>
+  <div class="d-flex justify-content-between">
+    <ul class="nav tabs-underlined" id="myTab" role="tablist">
+      <li class="nav-item me-3" role="presentation">
+        <span class="nav-link tab-underlined active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new-tab-pane" role="tab" aria-controls="new-tab-pane" aria-selected="true">New Players (<%= @unconfirmed_players.count %>)</span>
+      </li>
+      <li class="nav-item me-3" role="presentation">
+        <span class="nav-link tab-underlined" id="already-tab" data-bs-toggle="tab" data-bs-target="#already-tab-pane" role="tab" aria-controls="already-tab-pane" aria-selected="false">Existing Players (<%= @imported_spot_places.count %>)</span>
+      </li>
+      <li class="nav-item me-3" role="presentation">
+        <span class="nav-link tab-underlined" id="missing-tab" data-bs-toggle="tab" data-bs-target="#missing-tab-pane" role="tab" aria-controls="missing-tab-pane" aria-selected="false">Missing from Import (<%= @missing_spot_places.count %>)</span>
+      </li>
+    </ul>
+    <%= link_to "Back to #{@squad.name}", squad_path(@squad), class: 'btn btn-outline-secondary'  %>
+  </div>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade py-3 show active" id="new-tab-pane" role="tabpanel" aria-labelledby="new-tab" tabindex="0" data-controller='group-submit'>
       <% if @unconfirmed_players.any? %>
