@@ -1,6 +1,6 @@
 class SquadsController < ApplicationController
   before_action :set_squad, only: [:show, :import, :empty, :update, :destroy, :import_results]
-
+  before_action :load_import_vars, only: :import_results
   def new
     # Currently not used
     # @team = Team.find(params[:team_id])
@@ -30,14 +30,6 @@ class SquadsController < ApplicationController
   end
 
   def import_results
-    @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
-    @html_spot_places = @squad.spot_places.where(player: @html_players)
-    @spot_places_new = @html_spot_places.unchanged
-    @spot_places_old = @html_spot_places.changed
-    @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
-    @spots = @squad.spots
-    @tags = Tag.created_by_app_or_user(current_user)
-    @player_tag = PlayerTag.new
     render :import
   end
 
@@ -45,14 +37,7 @@ class SquadsController < ApplicationController
     @squad.update(squad_params)
     if @squad.uploads.attached?
       flash[:notice] = "Players imported from HTML"
-      @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
-      @html_spot_places = @squad.spot_places.where(player: @html_players)
-      @spot_places_new = @html_spot_places.unchanged
-      @spot_places_old = @html_spot_places.changed
-      @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
-      @spots = @squad.spots
-      @tags = Tag.created_by_app_or_user(current_user)
-      @player_tag = PlayerTag.new
+      load_import_vars
       # √ return players from html
       # √ show which spot they'll be placed in
       # allow to choose stars there? (hard)
@@ -91,5 +76,21 @@ class SquadsController < ApplicationController
 
   def squad_params
     params.require(:squad).permit(:uploads, :name, :total_rows, :team_id, spots_attributes: [:name, :position_id, :row_number, :rank, :_destroy])
+  end
+
+  def load_import_vars
+    @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
+    @html_spot_places = @squad.spot_places.where(player: @html_players)
+    @spot_places_new = @html_spot_places.unchanged
+    @spot_places_old = @html_spot_places.changed
+    @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
+    if @html_spot_places.empty? && @missing_spot_places.any?
+      # for first uploads
+      @html_spot_places = @missing_spot_places.dup
+      @missing_spot_places = []
+    end
+    @spots = @squad.spots
+    @tags = Tag.created_by_app_or_user(current_user)
+    @player_tag = PlayerTag.new
   end
 end
