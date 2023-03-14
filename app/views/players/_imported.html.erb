@@ -28,7 +28,7 @@
       <%= render 'tags/modal', player: player, tags: tags, player_tag: player_tag, show_desc: false %>
     </div>
     <div class="col-12 col-sm-1">
-      <%= link_to player_path(player, squad_id: squad.id, remote: true), class: "ms-3 tab-underlined text-danger", data: { turbo_method: :delete, turbo_confirm: "⚠️ Remove player from squad? This is irreversible."}  do %>
+      <%= link_to player_path(player, squad_id: squad.id, remote: true), class: "ms-3 tab-underlined text-danger", data: { turbo_method: :delete, group_submit_target: 'link'}  do %>
         <small><i class="fa-regular fa-circle-xmark"></i></small>
       <% end %>
     </div>
