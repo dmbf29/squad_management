@@ -94,7 +94,7 @@ class Player < ApplicationRecord
       when "Rec" then :recommendation
       when "Media Description" then :media_desc
       when "Agreed Playing Time" then :playing_time
-      when "Last Transfer Fee" then :price_purchased
+      when "Last Trans. Fee" then :price_purchased
       end
     end
   end
@@ -120,6 +120,6 @@ class Player < ApplicationRecord
   end
 
   def recommended_spot(spots)
-    spots.find_by(position: position) || spots.sample
+    spots&.first&.squad&.spots&.find_by(id: self.spots) || spots.find_by(position: position) || spots.sample
   end
 end

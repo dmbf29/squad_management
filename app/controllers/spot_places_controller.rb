@@ -12,7 +12,9 @@ class SpotPlacesController < ApplicationController
   def update
     @spot_place = SpotPlace.find(params[:id])
     @spot_place.update(spot_place_params)
-    redirect_to squad_path(@spot_place.spot.squad)
+    # TODO: there are two different ways and this is breaking one of them
+    # redirect_to squad_path(@spot_place.spot.squad)
+    head :ok
   end
 
   def import
