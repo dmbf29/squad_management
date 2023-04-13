@@ -7,14 +7,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for squad, url: import_squad_path(squad), method: :post, html: { data: { controller: 'autosave' } } do |f| %>
+        <%= simple_form_for squad, url: import_squad_path(squad), method: :post, html: { data: { controller: 'group-submit' } } do |f| %>
           <div class="col-12">
             <%#= f.input :uploads, as: :file %>
-            <%= f.input :uploads, input_html: { class: 'd-none', data: { action: 'autosave#save' } }, label_html: { class: 'upload-photo'}, wrapper_html: { class: 'text-center'}, label: 'Choose file' %>
+            <%= f.input :uploads, input_html: { class: 'd-none', data: { action: 'change->group-submit#submit' } }, label_html: { class: 'upload-photo'}, wrapper_html: { class: 'text-center'}, label: 'Choose file' %>
+            <%= f.submit '', class: 'd-none', data: { group_submit_target: 'btn' } %>
           </div>
           <!-- <div class="col-12"> -->
           <%#= f.submit "Import", class: "btn btn-primary" %>
-          <!-- </div> -->
+          <!-- </div  > -->
         <% end %>
         <div class="d-flex justify-content-center">
           <%= link_to 'See last import', import_squad_path(squad), class: 'text-light'  %>

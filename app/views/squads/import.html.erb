@@ -1,44 +1,49 @@
-<div class="accordion" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingOne">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        New Players (<%= @spot_places_new.count %>)
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse" aria-labelledby="flush-headingOne">
-      <div class="accordion-body">
-        <% @spot_places_new.each do |spot_place| %>
-          <%= render 'players/imported', player: spot_place.player, spot_place: spot_place, spots: @spots, tags: @tags, player_tag: @player_tag %>
-        <% end %>
-      </div>
-    </div>
+<div class="container my-3">
+  <div class="d-flex justify-content-between">
+    <ul class="nav tabs-underlined" id="myTab" role="tablist">
+      <li class="nav-item me-3" role="presentation">
+        <span class="nav-link tab-underlined active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new-tab-pane" role="tab" aria-controls="new-tab-pane" aria-selected="true">New Players (<%= @unconfirmed_players.count %>)</span>
+      </li>
+      <li class="nav-item me-3" role="presentation">
+        <span class="nav-link tab-underlined" id="already-tab" data-bs-toggle="tab" data-bs-target="#already-tab-pane" role="tab" aria-controls="already-tab-pane" aria-selected="false">Existing Players (<%= @imported_spot_places.count %>)</span>
+      </li>
+      <li class="nav-item me-3" role="presentation">
+        <span class="nav-link tab-underlined" id="missing-tab" data-bs-toggle="tab" data-bs-target="#missing-tab-pane" role="tab" aria-controls="missing-tab-pane" aria-selected="false">Missing from Import (<%= @missing_spot_places.count %>)</span>
+      </li>
+    </ul>
+    <%= link_to "Back to #{@squad.name}", squad_path(@squad), class: 'btn btn-outline-secondary'  %>
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        Existing Players (<%= @spot_places_old.count %>)
-      </button>
-    </h2>
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
-      <div class="accordion-body">
-        <% @spot_places_old.each do |spot_place| %>
-          <%= render 'players/imported', player: spot_place.player, spot_place: spot_place, spots: @spots, tags: @tags, player_tag: @player_tag %>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade py-3 show active" id="new-tab-pane" role="tabpanel" aria-labelledby="new-tab" tabindex="0" data-controller='group-submit'>
+      <% if @unconfirmed_players.any? %>
+        <div class="d-flex justify-content-center mb-2">
+          <button class='btn btn-info me-2' data-action="click->group-submit#submit">Approve All</button>
+          <button class='btn btn-outline-danger ms-2' data-action="click->group-submit#destroy">Remove All</button>
+        </div>
+        <% @unconfirmed_players.each do |player| %>
+          <%= render 'players/imported', player: player, spot_place: @spot_place, spots: @spots, tags: @tags, player_tag: @player_tag, squad: @squad %>
         <% end %>
-      </div>
+      <% else %>
+        <span>No players for this section</span>
+      <% end %>
     </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingThree">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-        Players in Squad but not in Imported (<%= @missing_spot_places.count %>)
-      </button>
-    </h2>
-    <div id="flush-collapseThree" class="accordion-collapse" aria-labelledby="flush-headingThree">
-      <div class="accordion-body">
+    <div class="tab-pane fade py-3" id="already-tab-pane" role="tabpanel" aria-labelledby="already-tab" tabindex="0">
+      <% if @imported_spot_places.any? %>
+        <% @imported_spot_places.each do |spot_place| %>
+          <%= render 'players/imported', player: spot_place.player, spot_place: spot_place, spots: @spots, tags: @tags, player_tag: @player_tag, squad: @squad %>
+        <% end %>
+      <% else %>
+        <span>No players for this section</span>
+      <% end %>
+    </div>
+    <div class="tab-pane fade py-3" id="missing-tab-pane" role="tabpanel" aria-labelledby="missing-tab" tabindex="0">
+      <% if @missing_spot_places.any? %>
         <% @missing_spot_places.each do |spot_place| %>
-          <%= render 'players/imported', player: spot_place.player, squad: @squad, spot_place: spot_place, spots: @spots, tags: @tags, player_tag: @player_tag %>
+          <%= render 'players/imported', player: spot_place.player, squad: @squad, spot_place: spot_place, spots: @spots, tags: @tags, player_tag: @player_tag, squad: @squad %>
         <% end %>
-      </div>
+      <% else %>
+        <span>No players for this section</span>
+      <% end %>
     </div>
   </div>
 </div>

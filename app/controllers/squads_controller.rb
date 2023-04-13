@@ -79,16 +79,18 @@ class SquadsController < ApplicationController
   end
 
   def load_import_vars
-    @html_players = ParseHtmlService.new(squad: @squad, url: @squad.last_upload_url).call
-    @html_spot_places = @squad.spot_places.where(player: @html_players)
-    @spot_places_new = @html_spot_places.unchanged
-    @spot_places_old = @html_spot_places.changed
-    @missing_spot_places = @squad.spot_places.where.not(player: @html_players)
-    if @html_spot_places.empty? && @missing_spot_places.any?
-      # for first uploads
-      @html_spot_places = @missing_spot_places.dup
-      @missing_spot_places = []
-    end
+    @imported_players = ParseHtmlService.new(team: @squad.team, url: @squad.last_upload_url).call
+    # Players imported but on other squads
+    # This doesn't work 👇
+    @duplicates = @squad.team.players.where(id: @imported_players).where.not(id: @squad.players)
+    # Players that need squad place
+    @unconfirmed_players = @squad.team.players.where.missing(:spot_places)
+    # Players previously imported and also being imported
+    @imported_spot_places = @squad.spot_places.where(player: @imported_players)
+    # Players previously imported but missing from currently import
+    @missing_spot_places = @squad.spot_places.where.not(player: @imported_players)
+    # To add players not confirmed
+    @spot_place = SpotPlace.new
     @spots = @squad.spots
     @tags = Tag.created_by_app_or_user(current_user)
     @player_tag = PlayerTag.new

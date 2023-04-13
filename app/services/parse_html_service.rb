@@ -2,12 +2,12 @@ require 'open-uri'
 require 'nokogiri'
 
 class ParseHtmlService
-  attr_reader :url, :squad, :players
+  attr_reader :url, :team, :players
 
   def initialize(attrs = {})
     @url = attrs[:url]
-    @squad = attrs[:squad]
-    @players = @squad.players
+    @team = attrs[:team]
+    @players = @team.players
     @html_players = []
   end
 
@@ -31,7 +31,7 @@ class ParseHtmlService
     end
     player_info = player_info.delete_if { |key, value| key.nil? }
     player_info = Player.sanitize_value(player_info)
-    player_info[:team_id] = squad.team.id
+    player_info[:team_id] = team.id
     player = players.find_by(name: player_info[:name])
     if player
       # TODO: should only update specific attributes
@@ -39,7 +39,9 @@ class ParseHtmlService
       @html_players << player
     else
       player = Player.create(player_info)
-      squad.add_player_in_spot(player)
+      @html_players << player
+      # TODO: should stop doing this
+      # squad.add_player_in_spot(player)
     end
     player.on_loan_color! if player.on_loan
   end
