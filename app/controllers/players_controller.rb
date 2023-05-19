@@ -39,10 +39,10 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:text_color, :current_ability, :potential_low, :potential_high, :price_purchased, :price_sold)
+    params.require(:player).permit(:text_color, :current_ability, :potential_low, :potential_high, :price_purchased, :price_sold, :join_date, :senior_signing)
   end
-#
+
   def player_create_params
-    params.require(:player).permit(:name, :home_grown_club, :home_grown_nation, :home_grown_date, :on_loan, :positions, :position_id, :age, :transfer_value, :text_color, :current_ability, :potential_low, :potential_high, :price_purchased, :price_sold)
+    params.require(:player).permit(:name, :home_grown_club, :home_grown_nation, :home_grown_date, :on_loan, :positions, :position_id, :age, :transfer_value, :text_color, :current_ability, :potential_low, :potential_high, :price_purchased, :price_sold, :join_date, :senior_signing)
   end
 end

@@ -1,5 +1,5 @@
 class SquadsController < ApplicationController
-  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy, :import_results]
+  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy, :import_results, :transfers]
   before_action :load_import_vars, only: :import_results
   def new
     # Currently not used
@@ -65,6 +65,12 @@ class SquadsController < ApplicationController
   def destroy
     @squad.destroy
     redirect_to teams_path
+  end
+
+  def transfers
+    @team = @squad.team
+    @new_squad = Squad.new
+    @grouped_players = @squad.players.where.not(join_date: nil).group_by { |player| player.join_date.month >= 6 ? player.join_date.year : player.join_date.year - 1 }.sort_by { |year, _players| -year }
   end
 
   private

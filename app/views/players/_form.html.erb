@@ -29,7 +29,15 @@
       <%= f.input :price_sold, input_html: { min: 0 } %>
     </div>
   </div>
-  <fieldset class="form-group radio_buttons required player_color">
+  <div class="row align-items-end">
+    <div class="col">
+      <%= f.input :join_date, html5: true %>
+    </div>
+    <div class="col">
+      <%= f.input :senior_signing %>
+    </div>
+  </div>
+  <fieldset class="form-group radio_buttons required player_color mt-1">
     <legend class="col-form-label pt-0">Text color</legend>
     <div class="color-wrapper">
       <input type="hidden" name="player[text_color]" value="">

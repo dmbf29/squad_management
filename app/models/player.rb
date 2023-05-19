@@ -9,6 +9,7 @@
 #  home_grown_club        :boolean          default(FALSE)
 #  home_grown_date        :date
 #  home_grown_nation      :boolean          default(FALSE)
+#  join_date              :date
 #  media_desc             :string
 #  name                   :string
 #  nationality            :string
@@ -22,6 +23,7 @@
 #  recommendation         :string
 #  release_clause         :integer
 #  release_clause_special :integer
+#  senior_signing         :boolean          default(FALSE)
 #  text_color             :string
 #  transfer_value         :integer
 #  created_at             :datetime         not null

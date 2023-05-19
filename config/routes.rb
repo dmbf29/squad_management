@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :import, to: 'squads#import_results'
       post :import
       delete :empty
+      get :transfers
     end
   end
   resources :spots, only: [:create, :update, :destroy] do
