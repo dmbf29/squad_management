@@ -14,13 +14,16 @@
                 <div class="d-flex flex-column w-100">
                   <div class="w-100 d-flex align-item-center justify-content-between">
                     <small class='text-nowrap fw-bold' style="color: <%= player.text_color %>"><%= player.name %></small>
-                    <small class='text-nowrap fw-bold'><%= player.join_date.strftime('%b %d, %Y') %></small>
+                    <small class='text-nowrap'><%= player.join_date.strftime('%b %d, %Y') %></small>
                   </div>
-                  <div class="d-flex text-small align-items-center fw-light">
-                    <div class="d-flex me-1 <%= 'text-danger' if player.age >= 32 %> <%= 'text-success' if player.age < 20 %>">
+                  <div class="d-flex text-small align-items-center">
+                    <div class="d-flex me-1">
                       <%= player.age %>
                     </div>
-                    <div class="position-relative">
+                    <div class="d-flex me-1 fw-light">
+                      - <%= player.positions %> -
+                    </div>
+                    <div class="position-relative fw-light">
                       <div class="text-transparent">stars</div>
                       <%= render 'players/stars', number: player.potential_high, special: true %>
                       <%= render 'players/stars', number: player.current_ability, special: false %>

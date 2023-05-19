@@ -3,11 +3,14 @@
     <i class="fa-solid fa-grip me-2 handle"></i>
     <div class="d-flex flex-column">
       <small class='text-nowrap fw-bold cursor-pointer' data-bs-toggle="modal" data-bs-target="#playerModal-<%= spot_place.player.id %>" style="color: <%= spot_place.player.text_color %>"><%= spot_place.player.name %></small>
-      <div class="d-flex text-small align-items-center fw-light">
+      <div class="d-flex text-small align-items-center">
         <div class="d-flex me-1 <%= 'text-danger' if spot_place.player.age >= 32 %> <%= 'text-success' if spot_place.player.age < 20 %>">
           <%= spot_place.player.age %>
         </div>
-        <div class="position-relative">
+        <div class="d-flex me-1 fw-light">
+          - <%= spot_place.player.positions %> -
+        </div>
+        <div class="position-relative fw-light">
           <div class="text-transparent">stars</div>
           <%= render 'players/stars', number: spot_place.player.potential_high, special: true %>
           <%= render 'players/stars', number: spot_place.player.current_ability, special: false %>
