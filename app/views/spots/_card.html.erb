@@ -4,8 +4,8 @@
     <%= render 'spots/modal', spot: spot, row_number: row_number, squad: squad %>
   </div>
   <div data-controller="sortable-rows" class="h-100 mt-3" data-id="<%= spot.id %>">
-    <% spot.spot_places.order(:rank).each do |spot_place| %>
-      <%= render 'spot_places/row', spot_place: spot_place %>
+    <% spot.spot_places.order(:rank).each_with_index do |spot_place, index| %>
+      <%= render 'spot_places/row', spot_place: spot_place, index: index %>
     <% end %>
   </div>
 </div>
