@@ -1,9 +1,9 @@
 <div class="container mt-3">
   <%= render 'squads/header', squad: @squad, new_squad: @new_squad, team: @team %>
   <h3><%= @squad.name %> Transfers</h3>
-  <div class="d-flex justify-content-evenly mb-3" data-controller="sortable-cards">
+  <div class="cards mb-3" data-controller="sortable-cards">
     <% @grouped_players.each do |year, players| %>
-      <div class="card-spot mx-2 flex-same-size">
+      <div class="card-spot mx-2">
         <div class="d-flex justify-content-center py-2 text-primary border-bottom">
           <span class='fw-bold'><%= year %> - <%= year + 1 %> <small class='text-light fw-light'>(<%= players.count %>)</small></span>
         </div>
