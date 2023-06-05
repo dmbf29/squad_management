@@ -1,0 +1,11 @@
+<%= simple_form_for player, remote: true, html: { class: 'd-flex', data: { controller: 'autosave', autosave_delay_value: '1000' } } do |f| %>
+  <div class="col">
+    <%= f.input :current_ability, input_html: { min: 0, max: 5, step: 0.5, data: { action: 'keyup->autosave#save' } } %>
+  </div>
+  <div class="col">
+    <%= f.input :potential_high, input_html: { min: 0, max: 5, step: 0.5, data: { action: 'keyup->autosave#save' } } %>
+  </div>
+  <div class="col">
+    <%= f.input :join_date, html5: true, input_html: { data: { action: 'change->autosave#save' } } %>
+  </div>
+<% end %>
