@@ -117,6 +117,12 @@ class Player < ApplicationRecord
     player_info
   end
 
+  def dont_overwrite
+    {
+      price_purchased: price_purchased
+    }
+  end
+
   def other_team_squads(squad)
     team.squads.where.not(id: squad).includes([:spots])
   end

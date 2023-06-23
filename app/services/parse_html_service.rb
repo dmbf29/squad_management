@@ -35,6 +35,7 @@ class ParseHtmlService
     player = players.find_by(name: player_info[:name])
     if player
       # TODO: should only update specific attributes
+      player_info = player_info.merge(player.dont_overwrite)
       player.update(player_info)
       @html_players << player
     else
@@ -44,5 +45,6 @@ class ParseHtmlService
       # squad.add_player_in_spot(player)
     end
     player.on_loan_color! if player.on_loan
+    # TODO: add incoming color
   end
 end
