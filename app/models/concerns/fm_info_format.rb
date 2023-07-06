@@ -23,7 +23,7 @@ module FmInfoFormat
       # Date.parse(date_string)
       # bc of month/year/date 🤯
       dates = date_string.split('/')
-      Date.new(dates[2].to_i, dates[0].to_i, dates[1].to_i)
+      Date.new(dates[2].to_i, dates[1].to_i, dates[0].to_i)
     end
 
     def on_loan(string)
