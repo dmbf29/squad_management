@@ -9,6 +9,6 @@
     <%= f.input :join_date, html5: true, input_html: { data: { action: 'change->autosave#save' }, class: 'border-0' } %>
   </div>
   <div class="col">
-    <%= f.input :price_purchased, html5: true, input_html: { data: { action: 'change->autosave#save' }, class: 'border-0' } %>
+    <%= f.input :price_purchased, html5: true, input_html: { data: { action: 'keyup->autosave#save' }, class: 'border-0' } %>
   </div>
 <% end %>
