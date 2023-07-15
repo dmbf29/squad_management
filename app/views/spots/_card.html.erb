@@ -5,6 +5,7 @@
   </div>
   <div data-controller="sortable-rows" class="h-100 mt-3" data-id="<%= spot.id %>">
     <% spot.spot_places.order(:rank).each_with_index do |spot_place, index| %>
+      <% next if spot_place.player.on_loan && params[:hide_loan] && params[:hide_loan] == 'true' %>
       <%= render 'spot_places/row', spot_place: spot_place, index: index %>
     <% end %>
   </div>
