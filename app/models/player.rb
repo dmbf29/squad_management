@@ -81,6 +81,11 @@ class Player < ApplicationRecord
     save
   end
 
+  def incoming_color!
+    self.text_color = team.incoming_color.color.hex unless Color.pluck(:hex).include?(text_color)
+    save
+  end
+
   # Converting all the FM column names in the corresponding DB colmn
   def self.sanitize_keys(keys)
     keys.map! do |key|

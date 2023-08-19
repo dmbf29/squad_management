@@ -2,11 +2,12 @@ require 'open-uri'
 require 'nokogiri'
 
 class ParseHtmlService
-  attr_reader :url, :team, :players
+  attr_reader :url, :team, :players, :incoming
 
   def initialize(attrs = {})
     @url = attrs[:url]
     @team = attrs[:team]
+    @incoming = attrs[:incoming]
     @players = @team.players
     @html_players = []
   end
@@ -40,6 +41,7 @@ class ParseHtmlService
       @html_players << player
     else
       player = Player.create(player_info)
+      player.incoming_color! if incoming
       @html_players << player
       # TODO: should stop doing this
       # squad.add_player_in_spot(player)

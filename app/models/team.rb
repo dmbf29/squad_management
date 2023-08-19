@@ -36,12 +36,17 @@ class Team < ApplicationRecord
         team: self,
         color: color,
         description: description,
-        loan: color.name == 'purple'
+        loan: color.name == 'purple',
+        incoming: color.name == 'yellow'
       )
     end
   end
 
   def loan_color
     chosen_colors.find_by(loan: true)
+  end
+
+  def incoming_color
+    chosen_colors.find_by(incoming: true)
   end
 end
