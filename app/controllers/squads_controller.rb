@@ -85,7 +85,7 @@ class SquadsController < ApplicationController
   end
 
   def load_import_vars
-    @imported_players = ParseHtmlService.new(team: @squad.team, url: @squad.last_upload_url).call
+    @imported_players = ParseHtmlService.new(team: @squad.team, url: @squad.last_upload_url, incoming: params[:incoming] == 'true').call
     # Players imported but on other squads
     # This doesn't work 👇
     @duplicates = @squad.team.players.where(id: @imported_players).where.not(id: @squad.players)

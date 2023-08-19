@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
+#  incoming    :boolean          default(FALSE)
 #  loan        :boolean          default(FALSE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
