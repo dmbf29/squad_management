@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-between align-item-center mb-2">
+<div class="d-flex align-item-center mb-2 mx-2">
   <% team.chosen_colors.each do |chosen_color| %>
-    <span><i class="fa-solid fa-square" style="color: '<%= chosen_color.color.hex %>'"></i> <%=  %></span>
+    <span class="me-3 text-nowrap"><i class="fa-solid fa-square" style="color: <%= chosen_color.color.hex %>"></i> <small><%= chosen_color.description %></small></span>
   <% end %>
 </div>

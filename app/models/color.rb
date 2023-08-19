@@ -16,13 +16,13 @@ class Color < ApplicationRecord
 
   def self.descriptions(color)
     case color.name
-    when 'gray'    then 'Squad Member'
-    when 'red'     then 'Need Action'
+    when 'gray'    then 'Squad'
     when 'green'   then 'Youth'
     when 'yellow'  then 'Incoming'
-    when 'orange'  then 'Extra'
     when 'purple'  then 'Out Loan'
     when 'blue'    then 'In Loan'
+    when 'red'     then 'Action'
+    when 'orange'  then 'Extra'
     when 'pink'    then 'Watch'
     when 'brown'   then 'Disposable'
     end
