@@ -1,6 +1,7 @@
 <div class="container mt-3">
   <%= render 'squads/header', squad: @squad, new_squad: @new_squad, team: @team %>
   <%= render 'squads/subheader', squad: @squad %>
+  <%= render 'players/colors' %>
   <% @spots.each do |row_number, spots| %>
     <div class="d-flex justify-content-evenly mb-3" data-controller="sortable-cards" data-row="<%= row_number %>">
       <% spots.sort_by(&:rank).each do |spot| %>

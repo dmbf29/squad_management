@@ -26,4 +26,17 @@ class Team < ApplicationRecord
   has_many :spots, through: :squads
   validates :name, presence: true
   accepts_nested_attributes_for :squads, reject_if: proc { |attributes| attributes['name'].blank? }, allow_destroy: true
+  after_create :add_colors
+
+  def add_colors
+    Color.find_each do |color|
+      description = Color.descriptions(color)
+      ChosenColor.create(
+        team: self,
+        color: color,
+        description: description,
+        loan: color.name == 'purple'
+      )
+    end
+  end
 end
