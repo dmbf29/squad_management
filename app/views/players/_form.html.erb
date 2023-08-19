@@ -41,10 +41,10 @@
     <legend class="col-form-label pt-0">Text color</legend>
     <div class="color-wrapper">
       <input type="hidden" name="player[text_color]" value="">
-      <% Player::COLORS.each do |color| %>
+      <% @squad.team.chosen_colors.each do |chosen_color| %>
         <div class="color-item">
-          <input class="form-check-input radio_buttons required color-selector" data-style="ruby" type="radio" value="<%= color %>" name="player[text_color]" id="player_color_id_<%= color.delete('#') %>-<%= player.id %>" <%= 'checked' if player.text_color == color %>>
-          <label class="form-check-label collection_radio_buttons" for="player_color_id_<%= color.delete('#') %>-<%= player.id %>" style='background-color: <%= color %>'><%= color %></label>
+          <input class="form-check-input radio_buttons required color-selector" data-style="ruby" type="radio" value="<%= chosen_color.color.hex %>" name="player[text_color]" id="player_color_id_<%= chosen_color.color.hex.delete('#') %>-<%= player.id %>" <%= 'checked' if player.text_color == chosen_color.color.hex %>>
+          <label class="form-check-label collection_radio_buttons" for="player_color_id_<%= chosen_color.color.hex.delete('#') %>-<%= player.id %>" style='background-color: <%= chosen_color.color.hex %>'><%= chosen_color.color.name %></label>
         </div>
       <% end %>
     </div>

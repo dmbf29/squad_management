@@ -55,7 +55,7 @@ class Player < ApplicationRecord
   validates :name, presence: true
   RATINGS = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
   # COLORS = ["gray",    "red",    "green",   'yellow',  'orange',  'purple',  'blue',    'pink',    'brown']
-  COLORS = ["#DAD2D8", "#EA526F", "#03C7B4", '#F4D58D', '#FA7E61', '#7052b4', '#1E91D6', '#EA9FE3', '#813405']
+  # COLORS = ["#DAD2D8", "#EA526F", "#03C7B4", '#F4D58D', '#FA7E61', '#7052b4', '#1E91D6', '#EA9FE3', '#813405']
   UPDATEABLE_HTML_ATTRIBUTES = [
     :home_grown_nation,
     :home_grown_club,
@@ -80,6 +80,7 @@ class Player < ApplicationRecord
     end
     save
   end
+
   # Converting all the FM column names in the corresponding DB colmn
   def self.sanitize_keys(keys)
     keys.map! do |key|

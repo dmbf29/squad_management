@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between align-item-center mb-2">
-  <% Player::COLORS.each do |color| %>
-    <span></span>
+  <% team.chosen_colors.each do |chosen_color| %>
+    <span><i class="fa-solid fa-square" style="color: '<%= chosen_color.color.hex %>'"></i> <%=  %></span>
   <% end %>
 </div>
