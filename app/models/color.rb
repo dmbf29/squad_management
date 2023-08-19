@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: colors
+#
+#  id         :bigint           not null, primary key
+#  hex        :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Color < ApplicationRecord
   validates :hex, presence: true
 

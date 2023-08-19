@@ -1,5 +1,6 @@
 class CreateColors < ActiveRecord::Migration[7.0]
   def change
+    remove_column :teams, :loan_color, :string
     create_table :colors do |t|
       t.string :name
       t.string :hex

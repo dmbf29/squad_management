@@ -40,7 +40,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :currency, :current_date, :loan_color, squads_attributes: [:name, :total_rows, :_destroy])
+    params.require(:team).permit(:name, :currency, :current_date, squads_attributes: [:name, :total_rows, :_destroy])
   end
 
   def set_team

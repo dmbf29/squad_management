@@ -10,10 +10,11 @@
         <%= simple_form_for team, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
           <%= f.input :name %>
           <%= f.input :currency, input_html: { value: '£' } %>
-          <div data-controller="color-picker" class='mb-3'>
-            <%= f.input :loan_color, as: :hidden, input_html: { data: { color_picker_target: 'input', style: 'margin-bottom: 0 !important' } }, wrapper_html: { style: 'margin-bottom: 0 !important' },  label_html: { class: 'mb-1'}, label: 'Text color for loan players' %>
+          <!-- TODO: Add Chosen Color to form here -->
+          <!-- <div data-controller="color-picker" class='mb-3'>
+            <%#= f.input :loan_color, as: :hidden, input_html: { data: { color_picker_target: 'input', style: 'margin-bottom: 0 !important' } }, wrapper_html: { style: 'margin-bottom: 0 !important' },  label_html: { class: 'mb-1'}, label: 'Text color for loan players' %>
             <div data-color-picker-target="button"></div>
-          </div>
+          </div> -->
           <h5>Add Indv Squad Name / Formation</h5>
           <%= f.simple_fields_for :squads do |squads_form| %>
             <div class="d-flex align-items-center w-100">

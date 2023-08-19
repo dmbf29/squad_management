@@ -74,9 +74,9 @@ class Player < ApplicationRecord
 
   def on_loan_color!
     if on_loan
-      self.text_color = team.loan_color
+      self.text_color = team.loan_color.hex
     else
-      self.text_color = nil unless COLORS.include?(text_color)
+      self.text_color = nil unless Color.pluck(:hex).include?(text_color)
     end
     save
   end

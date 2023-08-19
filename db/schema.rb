@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_19_054338) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_081447) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -40,6 +41,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_054338) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "chosen_colors", force: :cascade do |t|
+    t.string "description"
+    t.boolean "loan", default: false
+    t.bigint "team_id", null: false
+    t.bigint "color_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_chosen_colors_on_color_id"
+    t.index ["team_id"], name: "index_chosen_colors_on_team_id"
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.string "hex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -146,7 +165,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_054338) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "loan_color", default: "#7052b4"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -165,6 +183,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_054338) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chosen_colors", "colors"
+  add_foreign_key "chosen_colors", "teams"
   add_foreign_key "notes", "players"
   add_foreign_key "player_tags", "players"
   add_foreign_key "player_tags", "tags"

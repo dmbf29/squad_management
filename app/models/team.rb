@@ -5,7 +5,6 @@
 #  id           :bigint           not null, primary key
 #  currency     :string           default("£")
 #  current_date :date
-#  loan_color   :string           default("#7052b4")
 #  name         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -24,6 +23,8 @@ class Team < ApplicationRecord
   has_many :squads, dependent: :destroy
   has_many :players, dependent: :destroy
   has_many :spots, through: :squads
+  has_many :chosen_colors
+  has_many :colors, through: :chosen_colors
   validates :name, presence: true
   accepts_nested_attributes_for :squads, reject_if: proc { |attributes| attributes['name'].blank? }, allow_destroy: true
   after_create :add_colors
@@ -38,5 +39,9 @@ class Team < ApplicationRecord
         loan: color.name == 'purple'
       )
     end
+  end
+
+  def loan_color
+    chosen_colors.find_by(loan: true)
   end
 end
