@@ -1,5 +1,5 @@
 class SquadsController < ApplicationController
-  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy, :import_results, :transfers]
+  before_action :set_squad, only: [:show, :import, :empty, :update, :destroy, :import_results, :transfers, :duplicate]
   before_action :load_import_vars, only: :import_results
   def new
     # Currently not used
@@ -71,6 +71,13 @@ class SquadsController < ApplicationController
     @team = @squad.team
     @new_squad = Squad.new
     @grouped_players = @squad.players.where.not(join_date: nil).group_by { |player| player.join_date.month >= 6 ? player.join_date.year : player.join_date.year - 1 }.sort_by { |year, _players| -year }
+  end
+
+  def duplicate
+    @new_squad = @squad.deep_clone include: { spots: :spot_places }
+    @new_squad.name = params[:squad][:name]
+    @new_squad.save
+    redirect_to squad_path(@new_squad)
   end
 
   private

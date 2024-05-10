@@ -1,4 +1,4 @@
-<%= simple_form_for squad, url: duplicate_squad_path(squad) do |f| %>
+<%= simple_form_for squad, url: duplicate_squad_path(squad), method: :post do |f| %>
   <%= f.input :name, placeholder: 'New formation name', label: 'New Name', input_html: { value: "#{squad.name} (copy)" } %>
   <%= f.submit 'Duplicate', class: 'btn btn-primary' %>
 <% end %>
