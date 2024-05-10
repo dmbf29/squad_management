@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post :import
       delete :empty
       get :transfers
+      post :duplicate
     end
   end
   resources :spots, only: [:create, :update, :destroy] do
