@@ -19,7 +19,7 @@
       <%= simple_form_for spot_place, url: url, remote: true, html: { data: { controller: 'submit-form' } } do |f| %>
         <%= f.association :player, as: :hidden, input_html: { value: player.id }, wrapper_html: { style: 'margin-bottom: 0 !important' } %>
         <div class="d-flex">
-          <%= f.association :spot, collection: spots, selected: player.recommended_spot(spots).id, label: false, input_html: { class: 'ms-2 border-0', data: { action: 'change->submit-form#submit' } }, wrapper_html: { class: '' }, required: false %>
+          <%= f.association :spot, collection: spots.order(name: :asc), selected: player.recommended_spot(spots).id, label: false, input_html: { class: 'ms-2 border-0', data: { action: 'change->submit-form#submit' } }, wrapper_html: { class: '' }, required: false %>
           <%# raise %>
           <%= f.submit '✔️', class: "btn btn-success #{ 'd-none' if spot_place.id }", data: { submit_form_target: 'btn', group_submit_target: 'btn' } %>
         </div>
