@@ -33,7 +33,7 @@ class ParseHtmlService
     player_info = player_info.delete_if { |key, value| key.nil? }
     player_info = Player.sanitize_value(player_info)
     player_info[:team_id] = team.id
-    player = players.find_by(name: player_info[:name])
+    player = players.find_by(name: player_info[:name], positions: player_info[:positions]) || players.find_by(name: player_info[:name])
     if player
       # TODO: should only update specific attributes
       player_info = player_info.merge(player.dont_overwrite)
